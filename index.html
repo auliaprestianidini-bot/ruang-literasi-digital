@@ -8,27 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   margin:0;
   font-family:'Poppins', sans-serif;
-  background:linear-gradient(135deg,#d1fae5,#dbeafe);
+  background:linear-gradient(135deg,#a7f3d0,#93c5fd);
   color:#0f172a;
 }
 
-/* NAVBAR */
+/* NAV */
 header{
-  position:sticky;
-  top:0;
-  background:white;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(10px);
+  padding:12px;
   display:flex;
   justify-content:center;
   gap:20px;
-  padding:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  position:sticky;
+  top:0;
 }
 
 header a{
@@ -40,14 +36,14 @@ header a{
 /* SECTION */
 section{
   max-width:900px;
-  margin:50px auto;
+  margin:40px auto;
   background:white;
-  padding:30px;
+  padding:25px;
   border-radius:18px;
   box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* BOOK */
+/* BOOK CARD */
 .book{
   background:#f8fafc;
   padding:15px;
@@ -69,11 +65,6 @@ button{
 button:hover{
   background:#059669;
 }
-
-/* RAK */
-li{
-  padding:5px 0;
-}
 </style>
 </head>
 
@@ -90,7 +81,7 @@ li{
 <!-- BERANDA -->
 <section id="beranda">
   <h1>📚 Ruang Literasi Digital</h1>
-  <p>Tempat membaca, menyimpan, dan menikmati buku digital dengan nyaman dan sederhana.</p>
+  <p>Tempat membaca dan menyimpan buku digital dengan nyaman dan sederhana.</p>
 </section>
 
 <!-- KOLEKSI -->
@@ -98,22 +89,17 @@ li{
   <h2>📖 Koleksi Buku</h2>
 
   <div class="book">
-    <h3>Bumi</h3>
-    <button onclick="simpan('Daun Yang Jatuh Tak Pernah Membenci Angin')">Simpan ke Rak</button>
-  </div>
-  <button onclick="baca('https://raw.githubusercontent.com/auliaprestianidini-bot/ruang-literasi-digital/93411223ea10f3f1e791b80733501796f71f168e/Daun%20%20yangJatuhTak%20%20Pernah%20Membenci%20Angin.pdf)">
-  📖 Baca Buku
-</button>
+    <h3>Daun yang Jatuh Tak Pernah Membenci Angin</h3>
 
-  <div class="book">
-    <h3>Laut Bercerita</h3>
-    <button onclick="simpan('Laut Bercerita')">Simpan ke Rak</button>
+    <button onclick="simpan('Daun yang Jatuh Tak Pernah Membenci Angin')">
+      Simpan ke Rak
+    </button>
+
+    <button onclick="baca('https://auliaprestianidini-bot.github.io/ruang-literasi-digital/daun.pdf')">
+      📖 Baca Buku
+    </button>
   </div>
 
-  <div class="book">
-    <h3>Filosofi Teras</h3>
-    <button onclick="simpan('Filosofi Teras')">Simpan ke Rak</button>
-  </div>
 </section>
 
 <!-- RAK -->
@@ -125,7 +111,7 @@ li{
 <!-- TENTANG -->
 <section id="tentang">
   <h2>ℹ️ Tentang</h2>
-  <p>Website ini dibuat untuk ruang literasi digital mahasiswa.</p>
+  <p>Website literasi digital sederhana.</p>
 </section>
 
 <script>
@@ -143,6 +129,10 @@ function tampilkan(){
   rak.forEach(b=>{
     list.innerHTML += "<li>"+b+"</li>";
   });
+}
+
+function baca(link){
+  window.open(link, "_blank");
 }
 
 tampilkan();
