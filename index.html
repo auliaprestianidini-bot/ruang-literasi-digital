@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ruang Literasi Digital</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -16,7 +16,7 @@ body{
 }
 
 header{
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.85);
   backdrop-filter:blur(10px);
   padding:12px;
   display:flex;
@@ -28,8 +28,8 @@ header{
 
 header a{
   text-decoration:none;
-  color:#0f172a;
   font-weight:600;
+  color:#0f172a;
 }
 
 section{
@@ -62,13 +62,6 @@ button{
 button:hover{
   background:#059669;
 }
-
-button.delete{
-  background:red;
-  margin-left:10px;
-  padding:4px 8px;
-  font-size:12px;
-}
 </style>
 </head>
 
@@ -81,11 +74,13 @@ button.delete{
   <a href="#tentang">Tentang</a>
 </header>
 
+<!-- BERANDA -->
 <section id="beranda">
   <h1>📚 Ruang Literasi Digital</h1>
-  <p>Tempat membaca dan menyimpan buku digital.</p>
+  <p>Website untuk membaca dan menyimpan buku digital.</p>
 </section>
 
+<!-- KOLEKSI -->
 <section id="koleksi">
   <h2>📖 Koleksi Buku</h2>
 
@@ -96,13 +91,26 @@ button.delete{
       Simpan ke Rak
     </button>
 
-    <button onclick="baca('https://example.com')">
+    <button onclick="baca('https://auliaprestianidini-bot.github.io/ruang-literasi-digital/daun.pdf')">
+      📖 Baca Buku
+    </button>
+  </div>
+
+  <div class="book">
+    <h3>Sungguh, Kau Boleh Pergi</h3>
+
+    <button onclick="simpan('Sungguh, Kau Boleh Pergi')">
+      Simpan ke Rak
+    </button>
+
+    <button onclick="baca('https://auliaprestianidini-bot.github.io/ruang-literasi-digital/boleh.pdf')">
       📖 Baca Buku
     </button>
   </div>
 
 </section>
 
+<!-- RAK -->
 <section id="rak">
   <h2>📌 Rak Saya</h2>
   <ul id="rakList"></ul>
@@ -111,9 +119,10 @@ button.delete{
   </button>
 </section>
 
+<!-- TENTANG -->
 <section id="tentang">
   <h2>ℹ️ Tentang</h2>
-  <p>Website literasi digital sederhana.</p>
+  <p>Website literasi digital sederhana untuk membaca buku.</p>
 </section>
 
 <script>
@@ -147,7 +156,9 @@ function tampilkan(){
     list.innerHTML += `
       <li>
         📚 ${b}
-        <button class="delete" onclick="hapus(${i})">Hapus</button>
+        <button onclick="hapus(${i})" style="background:red;margin-left:10px;padding:3px 8px;border:none;color:white;border-radius:6px;">
+          Hapus
+        </button>
       </li>
     `;
   });
