@@ -9,26 +9,17 @@
 body{
   margin:0;
   font-family:Arial;
-  background:linear-gradient(135deg,#a18cd1,#6ee7d2);
-  color:#222;section{
-  padding:60px 20px;
-  margin:30px 0;
-  background:rgba(255,255,255,0.6);
-  border-radius:20px;
-  max-width:900px;
-  margin-left:auto;
-  margin-right:auto;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
-  
+  background:linear-gradient(135deg,#e6f7ff,#d1f7e3);
+  color:#1f2937;
 }
 
+/* NAVBAR */
 header{
-  background:rgba(255,255,255,0.85);
+  background:white;
   padding:15px;
   position:sticky;
   top:0;
-  backdrop-filter:blur(10px);
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
 nav ul{
@@ -41,18 +32,26 @@ nav ul{
 
 nav a{
   text-decoration:none;
-  color:#333;
+  color:#2563eb;
   font-weight:bold;
 }
 
+/* SECTION BIAR TERPISAH */
 section{
-  padding:20px;
+  max-width:900px;
+  margin:30px auto;
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
+/* JUDUL */
 h2{
-  margin-bottom:10px;
+  color:#0ea5e9;
 }
 
+/* BOOK CARD */
 .book-container{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -60,15 +59,10 @@ h2{
 }
 
 .book{
-  background:white;
+  background:#f0f9ff;
   padding:15px;
-  border-radius:15px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.1);
-  transition:0.3s;
-}
-
-.book:hover{
-  transform:translateY(-5px);
+  border-radius:12px;
+  border:1px solid #dbeafe;
 }
 
 button{
@@ -76,9 +70,13 @@ button{
   padding:8px;
   border:none;
   border-radius:10px;
-  background:#6c63ff;
+  background:#10b981;
   color:white;
   cursor:pointer;
+}
+
+button:hover{
+  background:#059669;
 }
 </style>
 </head>
@@ -98,14 +96,13 @@ button{
 
 <section id="beranda">
   <h2>📚 Ruang Literasi Digital</h2>
-  <p>Tempat membaca buku digital dengan tampilan modern dan aesthetic ✨</p>
+  <p>Website membaca buku digital dengan tampilan hijau-biru yang bersih dan modern.</p>
 </section>
 
 <section id="koleksi">
   <h2>📖 Koleksi Buku</h2>
 
   <div class="book-container">
-
     <div class="book">
       <h3>Bumi</h3>
       <p>Tere Liye</p>
@@ -123,7 +120,6 @@ button{
       <p>Henry Manampiring</p>
       <button onclick="simpan('Filosofi Teras')">Simpan</button>
     </div>
-
   </div>
 </section>
 
@@ -134,7 +130,7 @@ button{
 
 <section id="tentang">
   <h2>ℹ️ Tentang</h2>
-  <p>Website literasi digital untuk membaca dan menyimpan buku favorit.</p>
+  <p>Website literasi digital untuk membaca dan menyimpan buku.</p>
 </section>
 
 <script>
@@ -148,9 +144,9 @@ function simpan(buku){
 function tampilkan(){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
   let list = document.getElementById("rakList");
-  list.innerHTML="";
+  list.innerHTML = "";
   rak.forEach(b => {
-    list.innerHTML += "<li>"+b+"</li>";
+    list.innerHTML += "<li>" + b + "</li>";
   });
 }
 
