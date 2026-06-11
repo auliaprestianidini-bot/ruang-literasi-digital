@@ -62,6 +62,10 @@ button{
 button:hover{
   background:#059669;
 }
+
+button.red{
+  background:red;
+}
 </style>
 </head>
 
@@ -70,14 +74,14 @@ button:hover{
 <header>
   <a href="#beranda">Beranda</a>
   <a href="#koleksi">Koleksi</a>
-  <a href="#rak">Rak Saya</a>
-  <a href="#tentang">Tentang</a>
+  <a href="#viewer">Baca</a>
+  <a href="#rak">Rak</a>
 </header>
 
 <!-- BERANDA -->
 <section id="beranda">
   <h1>📚 Ruang Literasi Digital</h1>
-  <p>Website untuk membaca dan menyimpan buku digital.</p>
+  <p>Website membaca buku digital sederhana.</p>
 </section>
 
 <!-- KOLEKSI -->
@@ -91,7 +95,7 @@ button:hover{
       Simpan ke Rak
     </button>
 
-    <button onclick="baca('https://auliaprestianidini-bot.github.io/ruang-literasi-digital/daun.pdf')">
+    <button onclick="bukaBuku('daun.pdf')">
       📖 Baca Buku
     </button>
   </div>
@@ -103,29 +107,40 @@ button:hover{
       Simpan ke Rak
     </button>
 
-    <button onclick="baca('https://auliaprestianidini-bot.github.io/ruang-literasi-digital/boleh.pdf')">
+    <button onclick="bukaBuku('boleh.pdf')">
       📖 Baca Buku
     </button>
   </div>
 
 </section>
 
+<!-- VIEWER -->
+<section id="viewer" style="display:none;">
+  <h2>📖 Mode Baca</h2>
+
+  <iframe id="pdfViewer"
+    style="width:100%; height:80vh; border:none; border-radius:12px;">
+  </iframe>
+
+  <br><br>
+
+  <button class="red" onclick="tutupBuku()">
+    Tutup Buku
+  </button>
+</section>
+
 <!-- RAK -->
 <section id="rak">
   <h2>📌 Rak Saya</h2>
   <ul id="rakList"></ul>
-  <button onclick="resetRak()" style="background:red;margin-top:10px;">
+
+  <button class="red" onclick="resetRak()">
     Reset Rak
   </button>
 </section>
 
-<!-- TENTANG -->
-<section id="tentang">
-  <h2>ℹ️ Tentang</h2>
-  <p>Website literasi digital sederhana untuk membaca buku.</p>
-</section>
-
 <script>
+
 function simpan(buku){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
 
@@ -156,7 +171,7 @@ function tampilkan(){
     list.innerHTML += `
       <li>
         📚 ${b}
-        <button onclick="hapus(${i})" style="background:red;margin-left:10px;padding:3px 8px;border:none;color:white;border-radius:6px;">
+        <button onclick="hapus(${i})" class="red" style="margin-left:10px;padding:4px 8px;">
           Hapus
         </button>
       </li>
@@ -166,7 +181,7 @@ function tampilkan(){
 
 function hapus(i){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
-  rak.splice(i, 1);
+  rak.splice(i,1);
   localStorage.setItem("rak", JSON.stringify(rak));
   tampilkan();
 }
@@ -176,11 +191,20 @@ function resetRak(){
   tampilkan();
 }
 
-function baca(link){
-  window.open(link, "_blank");
+// ===== VIEWER BUKU =====
+function bukaBuku(file){
+  document.getElementById("viewer").style.display = "block";
+  document.getElementById("pdfViewer").src = file;
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+function tutupBuku(){
+  document.getElementById("viewer").style.display = "none";
+  document.getElementById("pdfViewer").src = "";
 }
 
 tampilkan();
+
 </script>
 
 </body>
