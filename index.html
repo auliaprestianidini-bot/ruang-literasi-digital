@@ -15,7 +15,6 @@ body{
   color:#0f172a;
 }
 
-/* NAV */
 header{
   background:rgba(255,255,255,0.8);
   backdrop-filter:blur(10px);
@@ -33,7 +32,6 @@ header a{
   font-weight:600;
 }
 
-/* SECTION */
 section{
   max-width:900px;
   margin:40px auto;
@@ -43,7 +41,6 @@ section{
   box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* BOOK CARD */
 .book{
   background:#f8fafc;
   padding:15px;
@@ -65,12 +62,18 @@ button{
 button:hover{
   background:#059669;
 }
+
+button.delete{
+  background:red;
+  margin-left:10px;
+  padding:4px 8px;
+  font-size:12px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <header>
   <a href="#beranda">Beranda</a>
   <a href="#koleksi">Koleksi</a>
@@ -78,13 +81,11 @@ button:hover{
   <a href="#tentang">Tentang</a>
 </header>
 
-<!-- BERANDA -->
 <section id="beranda">
   <h1>📚 Ruang Literasi Digital</h1>
-  <p>Tempat membaca dan menyimpan buku digital dengan nyaman dan sederhana.</p>
+  <p>Tempat membaca dan menyimpan buku digital.</p>
 </section>
 
-<!-- KOLEKSI -->
 <section id="koleksi">
   <h2>📖 Koleksi Buku</h2>
 
@@ -95,20 +96,21 @@ button:hover{
       Simpan ke Rak
     </button>
 
-    <button onclick="baca('https://auliaprestianidini-bot.github.io/ruang-literasi-digital/daun.pdf')">
+    <button onclick="baca('https://example.com')">
       📖 Baca Buku
     </button>
   </div>
 
 </section>
 
-<!-- RAK -->
 <section id="rak">
   <h2>📌 Rak Saya</h2>
   <ul id="rakList"></ul>
+  <button onclick="resetRak()" style="background:red;margin-top:10px;">
+    Reset Rak
+  </button>
 </section>
 
-<!-- TENTANG -->
 <section id="tentang">
   <h2>ℹ️ Tentang</h2>
   <p>Website literasi digital sederhana.</p>
@@ -117,18 +119,50 @@ button:hover{
 <script>
 function simpan(buku){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
+
+  if(!buku || buku.trim() === "") return;
+
+  buku = buku.trim();
+
+  if(rak.includes(buku)) return;
+
   rak.push(buku);
   localStorage.setItem("rak", JSON.stringify(rak));
+
   tampilkan();
 }
 
 function tampilkan(){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
   let list = document.getElementById("rakList");
-  list.innerHTML="";
-  rak.forEach(b=>{
-    list.innerHTML += "<li>"+b+"</li>";
+
+  list.innerHTML = "";
+
+  if(rak.length === 0){
+    list.innerHTML = "<li>📭 Rak masih kosong</li>";
+    return;
+  }
+
+  rak.forEach((b, i) => {
+    list.innerHTML += `
+      <li>
+        📚 ${b}
+        <button class="delete" onclick="hapus(${i})">Hapus</button>
+      </li>
+    `;
   });
+}
+
+function hapus(i){
+  let rak = JSON.parse(localStorage.getItem("rak")) || [];
+  rak.splice(i, 1);
+  localStorage.setItem("rak", JSON.stringify(rak));
+  tampilkan();
+}
+
+function resetRak(){
+  localStorage.removeItem("rak");
+  tampilkan();
 }
 
 function baca(link){
