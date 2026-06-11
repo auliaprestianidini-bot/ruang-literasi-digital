@@ -5,132 +5,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ruang Literasi Digital</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#e6f7ff,#d1f7e3);
-  color:#1f2937;
+  font-family:'Poppins', sans-serif;
+  background:linear-gradient(135deg,#d1fae5,#dbeafe);
+  color:#0f172a;
 }
 
 /* NAVBAR */
 header{
-  background:white;
-  padding:15px;
   position:sticky;
   top:0;
+  background:white;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:12px;
   box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-nav ul{
-  display:flex;
-  gap:15px;
-  list-style:none;
-  margin:0;
-  padding:0;
-}
-
-nav a{
+header a{
   text-decoration:none;
-  color:#2563eb;
-  font-weight:bold;
+  color:#0f172a;
+  font-weight:600;
 }
 
-/* SECTION BIAR TERPISAH */
+/* SECTION */
 section{
   max-width:900px;
-  margin:30px auto;
+  margin:50px auto;
   background:white;
-  padding:25px;
-  border-radius:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* JUDUL */
-h2{
-  color:#0ea5e9;
-}
-
-/* BOOK CARD */
-.book-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-}
-
+/* BOOK */
 .book{
-  background:#f0f9ff;
+  background:#f8fafc;
   padding:15px;
-  border-radius:12px;
-  border:1px solid #dbeafe;
+  margin:12px 0;
+  border-radius:14px;
+  border:1px solid #e2e8f0;
 }
 
 button{
   margin-top:8px;
-  padding:8px;
-  border:none;
-  border-radius:10px;
   background:#10b981;
   color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
   cursor:pointer;
 }
 
 button:hover{
   background:#059669;
 }
+
+/* RAK */
+li{
+  padding:5px 0;
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <header>
-  <nav>
-    <ul>
-      <li><a href="#beranda">Beranda</a></li>
-      <li><a href="#koleksi">Koleksi</a></li>
-      <li><a href="#rak">Rak Saya</a></li>
-      <li><a href="#tentang">Tentang</a></li>
-    </ul>
-  </nav>
+  <a href="#beranda">Beranda</a>
+  <a href="#koleksi">Koleksi</a>
+  <a href="#rak">Rak Saya</a>
+  <a href="#tentang">Tentang</a>
 </header>
 
+<!-- BERANDA -->
 <section id="beranda">
-  <h2>📚 Ruang Literasi Digital</h2>
-  <p>Website membaca buku digital dengan tampilan hijau-biru yang bersih dan modern.</p>
+  <h1>📚 Ruang Literasi Digital</h1>
+  <p>Tempat membaca, menyimpan, dan menikmati buku digital dengan nyaman dan sederhana.</p>
 </section>
 
+<!-- KOLEKSI -->
 <section id="koleksi">
   <h2>📖 Koleksi Buku</h2>
 
-  <div class="book-container">
-    <div class="book">
-      <h3>Bumi</h3>
-      <p>Tere Liye</p>
-      <button onclick="simpan('Bumi')">Simpan</button>
-    </div>
+  <div class="book">
+    <h3>Bumi</h3>
+    <button onclick="simpan('Bumi')">Simpan ke Rak</button>
+  </div>
 
-    <div class="book">
-      <h3>Laut Bercerita</h3>
-      <p>Leila S. Chudori</p>
-      <button onclick="simpan('Laut Bercerita')">Simpan</button>
-    </div>
+  <div class="book">
+    <h3>Laut Bercerita</h3>
+    <button onclick="simpan('Laut Bercerita')">Simpan ke Rak</button>
+  </div>
 
-    <div class="book">
-      <h3>Filosofi Teras</h3>
-      <p>Henry Manampiring</p>
-      <button onclick="simpan('Filosofi Teras')">Simpan</button>
-    </div>
+  <div class="book">
+    <h3>Filosofi Teras</h3>
+    <button onclick="simpan('Filosofi Teras')">Simpan ke Rak</button>
   </div>
 </section>
 
+<!-- RAK -->
 <section id="rak">
   <h2>📌 Rak Saya</h2>
   <ul id="rakList"></ul>
 </section>
 
+<!-- TENTANG -->
 <section id="tentang">
   <h2>ℹ️ Tentang</h2>
-  <p>Website literasi digital untuk membaca dan menyimpan buku.</p>
+  <p>Website ini dibuat untuk ruang literasi digital mahasiswa.</p>
 </section>
 
 <script>
@@ -144,9 +136,9 @@ function simpan(buku){
 function tampilkan(){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
   let list = document.getElementById("rakList");
-  list.innerHTML = "";
-  rak.forEach(b => {
-    list.innerHTML += "<li>" + b + "</li>";
+  list.innerHTML="";
+  rak.forEach(b=>{
+    list.innerHTML += "<li>"+b+"</li>";
   });
 }
 
