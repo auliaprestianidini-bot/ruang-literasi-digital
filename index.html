@@ -6,50 +6,69 @@
 <title>Ruang Literasi Digital</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+body{
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(135deg,#a18cd1,#6ee7d2);
+  color:#222;
 }
 
-header {
-  background: #6c63ff;
-  padding: 15px;
+header{
+  background:rgba(255,255,255,0.85);
+  padding:15px;
+  position:sticky;
+  top:0;
+  backdrop-filter:blur(10px);
 }
 
-nav ul {
-  display: flex;
-  gap: 15px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+nav ul{
+  display:flex;
+  gap:15px;
+  list-style:none;
+  margin:0;
+  padding:0;
 }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:bold;
 }
 
-section {
-  padding: 20px;
+section{
+  padding:20px;
 }
 
-.book {
-  background: white;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 10px;
+h2{
+  margin-bottom:10px;
 }
 
-button {
-  margin-top: 5px;
-  padding: 6px;
-  border: none;
-  border-radius: 6px;
-  background: #6c63ff;
-  color: white;
-  cursor: pointer;
+.book-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+}
+
+.book{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+
+.book:hover{
+  transform:translateY(-5px);
+}
+
+button{
+  margin-top:8px;
+  padding:8px;
+  border:none;
+  border-radius:10px;
+  background:#6c63ff;
+  color:white;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -68,58 +87,60 @@ button {
 </header>
 
 <section id="beranda">
-  <h2>Beranda</h2>
-  <p>Selamat datang di Ruang Literasi Digital 📚</p>
+  <h2>📚 Ruang Literasi Digital</h2>
+  <p>Tempat membaca buku digital dengan tampilan modern dan aesthetic ✨</p>
 </section>
 
 <section id="koleksi">
-  <h2>Koleksi Buku</h2>
+  <h2>📖 Koleksi Buku</h2>
 
-  <div class="book">
-    <h3>Bumi</h3>
-    <p>Tere Liye</p>
-    <button onclick="simpan('Bumi')">Simpan ke Rak</button>
+  <div class="book-container">
+
+    <div class="book">
+      <h3>Bumi</h3>
+      <p>Tere Liye</p>
+      <button onclick="simpan('Bumi')">Simpan</button>
+    </div>
+
+    <div class="book">
+      <h3>Laut Bercerita</h3>
+      <p>Leila S. Chudori</p>
+      <button onclick="simpan('Laut Bercerita')">Simpan</button>
+    </div>
+
+    <div class="book">
+      <h3>Filosofi Teras</h3>
+      <p>Henry Manampiring</p>
+      <button onclick="simpan('Filosofi Teras')">Simpan</button>
+    </div>
+
   </div>
-
-  <div class="book">
-    <h3>Laut Bercerita</h3>
-    <p>Leila S. Chudori</p>
-    <button onclick="simpan('Laut Bercerita')">Simpan ke Rak</button>
-  </div>
-
-  <div class="book">
-    <h3>Filosofi Teras</h3>
-    <p>Henry Manampiring</p>
-    <button onclick="simpan('Filosofi Teras')">Simpan ke Rak</button>
-  </div>
-
 </section>
 
 <section id="rak">
-  <h2>Rak Saya</h2>
+  <h2>📌 Rak Saya</h2>
   <ul id="rakList"></ul>
 </section>
 
 <section id="tentang">
-  <h2>Tentang</h2>
-  <p>Website literasi digital sederhana.</p>
+  <h2>ℹ️ Tentang</h2>
+  <p>Website literasi digital untuk membaca dan menyimpan buku favorit.</p>
 </section>
 
 <script>
-function simpan(buku) {
+function simpan(buku){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
   rak.push(buku);
   localStorage.setItem("rak", JSON.stringify(rak));
   tampilkan();
 }
 
-function tampilkan() {
+function tampilkan(){
   let rak = JSON.parse(localStorage.getItem("rak")) || [];
   let list = document.getElementById("rakList");
-  list.innerHTML = "";
-
-  rak.forEach(buku => {
-    list.innerHTML += "<li>" + buku + "</li>";
+  list.innerHTML="";
+  rak.forEach(b => {
+    list.innerHTML += "<li>"+b+"</li>";
   });
 }
 
