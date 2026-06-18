@@ -387,6 +387,24 @@ alert("Buku sudah ada di rak.");
 }
 
 </script>
+<button onclick="simpanBuku('Danur','danur.pdf')">
+  Simpan ke Rak
+</button>
 
+<script>
+function simpanBuku(judul, file) {
+    let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+
+    let sudahAda = rak.some(b => b.judul === judul);
+
+    if (!sudahAda) {
+        rak.push({ judul: judul, file: file });
+        localStorage.setItem("rakBuku", JSON.stringify(rak));
+        alert("Berhasil disimpan ke rak!");
+    } else {
+        alert("Buku sudah ada di rak!");
+    }
+}
+</script>
 </body>
 </html>
