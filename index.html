@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -87,12 +88,8 @@ body::before{
 }
 
 @keyframes muncul{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
 /* Subjudul */
@@ -235,24 +232,44 @@ body::before{
     animation:kelapKelip 2s infinite;
 }
 
-.star1{
-    top:15%;
-    right:20%;
-}
-
-.star2{
-    top:25%;
-    left:20%;
-}
-
-.star3{
-    top:40%;
-    right:10%;
-}
+.star1{top:15%;right:20%;}
+.star2{top:25%;left:20%;}
+.star3{top:40%;right:10%;}
 
 @keyframes kelapKelip{
     50%{
         opacity:.3;
+    }
+}
+
+/* Glitter Putih */
+.glitter{
+    position:absolute;
+    color:white;
+    font-size:14px;
+    animation:glitter 2s infinite ease-in-out;
+    text-shadow:0 0 10px rgba(255,255,255,.9);
+}
+
+.g1{top:12%;left:15%;animation-delay:0s;}
+.g2{top:20%;right:18%;animation-delay:.5s;}
+.g3{top:35%;left:10%;animation-delay:1s;}
+.g4{top:42%;right:15%;animation-delay:1.5s;}
+.g5{top:65%;left:18%;animation-delay:2s;}
+.g6{top:70%;right:20%;animation-delay:.7s;}
+.g7{top:80%;left:30%;animation-delay:1.2s;}
+.g8{top:18%;left:40%;animation-delay:2.2s;}
+.g9{top:30%;right:35%;animation-delay:.9s;}
+.g10{top:75%;right:40%;animation-delay:1.8s;}
+
+@keyframes glitter{
+    0%,100%{
+        opacity:.2;
+        transform:scale(.7);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.4);
     }
 }
 </style>
@@ -268,6 +285,17 @@ body::before{
 <div class="star star2">✦</div>
 <div class="star star3">✦</div>
 
+<div class="glitter g1">✦</div>
+<div class="glitter g2">✦</div>
+<div class="glitter g3">✦</div>
+<div class="glitter g4">✦</div>
+<div class="glitter g5">✦</div>
+<div class="glitter g6">✦</div>
+<div class="glitter g7">✦</div>
+<div class="glitter g8">✦</div>
+<div class="glitter g9">✦</div>
+<div class="glitter g10">✦</div>
+
 <div class="container">
 
     <img src="ppliterasi.jpeg" alt="LiterasiKuy" class="logo">
@@ -275,7 +303,7 @@ body::before{
     <h1 class="judul">LiterasiKuy</h1>
 
     <p class="subjudul">
-        📚 Scroll E-Book Yuuu!!!! 📚
+        📖 ✨ Scroll E-Book Yuuu!!!! ✨ 📖
     </p>
 
     <button class="btn" onclick="mulaiBaca()">
@@ -297,3 +325,4 @@ function mulaiBaca(){
 
 </body>
 </html>
+```
