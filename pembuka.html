@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LiterasiKuy</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f5fbff 15%,
+        #e3f2ff 35%,
+        #c8e6ff 60%,
+        #9fd3ff 85%,
+        #1e3a5f 100%
+    );
+    position:relative;
+}
+
+/* Cahaya belakang logo */
+body::before{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:radial-gradient(
+        circle,
+        rgba(77,166,255,0.35) 0%,
+        rgba(255,255,255,0) 70%
+    );
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:1;
+}
+
+/* Container */
+.container{
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+/* Logo */
+.logo{
+    width:260px;
+    animation:logoMasuk 2s ease;
+    filter:drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+}
+
+@keyframes logoMasuk{
+    from{
+        opacity:0;
+        transform:translateY(-50px) scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* Judul */
+.judul{
+    margin-top:20px;
+    color:#16375b;
+    font-size:2.2rem;
+    font-weight:700;
+    text-shadow:0 3px 10px rgba(77,166,255,.25);
+    animation:muncul 2.5s ease;
+}
+
+@keyframes muncul{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+/* Subjudul */
+.subjudul{
+    margin-top:12px;
+    color:#36506f;
+    font-size:1.2rem;
+    font-weight:600;
+    animation:naikTurun 2s infinite ease-in-out;
+}
+
+@keyframes naikTurun{
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+/* Tombol */
+.btn{
+    margin-top:35px;
+    padding:15px 40px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(
+        45deg,
+        #7ec8ff,
+        #4da6ff,
+        #1e3a5f
+    );
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.4s;
+    box-shadow:0 12px 30px rgba(77,166,255,.35);
+}
+
+.btn:hover{
+    transform:translateY(-5px) scale(1.05);
+}
+
+/* AWAN */
+.cloud{
+    position:absolute;
+    background:white;
+    border-radius:50px;
+    opacity:0.85;
+}
+
+.cloud::before,
+.cloud::after{
+    content:'';
+    position:absolute;
+    background:white;
+    border-radius:50%;
+}
+
+.cloud1{
+    width:180px;
+    height:60px;
+    top:10%;
+    left:-250px;
+    animation:awan 30s linear infinite;
+}
+
+.cloud1::before{
+    width:70px;
+    height:70px;
+    top:-35px;
+    left:25px;
+}
+
+.cloud1::after{
+    width:90px;
+    height:90px;
+    top:-45px;
+    right:20px;
+}
+
+.cloud2{
+    width:140px;
+    height:50px;
+    top:28%;
+    left:-200px;
+    animation:awan 40s linear infinite;
+    animation-delay:5s;
+}
+
+.cloud2::before{
+    width:60px;
+    height:60px;
+    top:-25px;
+    left:20px;
+}
+
+.cloud2::after{
+    width:75px;
+    height:75px;
+    top:-35px;
+    right:20px;
+}
+
+.cloud3{
+    width:220px;
+    height:70px;
+    top:18%;
+    left:-300px;
+    animation:awan 50s linear infinite;
+    animation-delay:10s;
+}
+
+.cloud3::before{
+    width:90px;
+    height:90px;
+    top:-40px;
+    left:35px;
+}
+
+.cloud3::after{
+    width:100px;
+    height:100px;
+    top:-50px;
+    right:25px;
+}
+
+@keyframes awan{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(1700px);
+    }
+}
+
+/* Bintang */
+.star{
+    position:absolute;
+    color:white;
+    font-size:20px;
+    animation:kelapKelip 2s infinite;
+}
+
+.star1{
+    top:15%;
+    right:20%;
+}
+
+.star2{
+    top:25%;
+    left:20%;
+}
+
+.star3{
+    top:40%;
+    right:10%;
+}
+
+@keyframes kelapKelip{
+    50%{
+        opacity:.3;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
+
+<div class="star star1">✦</div>
+<div class="star star2">✦</div>
+<div class="star star3">✦</div>
+
+<div class="container">
+
+    <img src="ppliterasi.jpeg" alt="LiterasiKuy" class="logo">
+
+    <h1 class="judul">LiterasiKuy</h1>
+
+    <p class="subjudul">
+        📚 Scroll E-Book Yuuu!!!! 📚
+    </p>
+
+    <button class="btn" onclick="mulaiBaca()">
+        Mulai Baca
+    </button>
+
+</div>
+
+<script>
+function mulaiBaca(){
+    document.body.style.transition="1s";
+    document.body.style.opacity="0";
+
+    setTimeout(()=>{
+        window.location.href="beranda.html";
+    },1000);
+}
+</script>
+
+</body>
+</html>
