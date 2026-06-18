@@ -366,27 +366,34 @@ document.body.appendChild(glitter);
 
 </div>
 
-<script>
+script>
 
 function bukaBuku(file){
-window.open(file,"_blank");
+    window.open(file, "_blank");
 }
 
-function simpan(judul){
+function simpanBuku(judul, file){
 
-let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+    let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
 
-if(!rak.includes(judul)){
-rak.push(judul);
-localStorage.setItem("rakBuku",JSON.stringify(rak));
-alert("Buku berhasil disimpan ke rak!");
-}else{
-alert("Buku sudah ada di rak.");
-}
+    let sudahAda = rak.some(buku => buku.judul === judul);
 
+    if(!sudahAda){
+
+        rak.push({
+            judul: judul,
+            file: file
+        });
+
+        localStorage.setItem("rakBuku", JSON.stringify(rak));
+
+        alert("Buku berhasil disimpan ke rak!");
+
+    } else {
+
+        alert("Buku sudah ada di rak!");
+
+    }
 }
 
 </script>
-
-</body>
-</html>
