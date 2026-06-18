@@ -303,6 +303,26 @@ for(let i=0;i<50;i++){
 <div class="footer">
     © 2026 Ruang Literasi Digital
 </div>
+<div id="daftarRak"></div>
 
+<script>
+function tampilRak() {
+    let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+    let container = document.getElementById("daftarRak");
+
+    container.innerHTML = "";
+
+    rak.forEach(buku => {
+        container.innerHTML += `
+            <div>
+                <h3>${buku.judul}</h3>
+                <a href="${buku.file}" target="_blank">Baca Buku</a>
+            </div>
+        `;
+    });
+}
+
+tampilRak();
+</script>
 </body>
 </html>
