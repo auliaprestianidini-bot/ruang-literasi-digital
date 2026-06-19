@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koleksi Buku - Ruang LiterasiKu</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 
 *{
@@ -50,6 +52,37 @@ transition:0.3s;
 
 nav a:hover{
 color:#0077b6;
+}
+
+/* Logo Section */
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:20px;
+    padding-left:40px;
+}
+
+.logo-wrapper{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.3) 40%, rgba(77,166,255,0.2));
+    box-shadow:
+        0 0 30px rgba(77,166,255,0.6),
+        0 0 60px rgba(77,166,255,0.4),
+        inset -2px -2px 8px rgba(0,0,0,0.1),
+        inset 2px 2px 8px rgba(255,255,255,0.8);
+}
+
+.logo-wrapper img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    object-fit:contain;
 }
 
 /* Judul */
@@ -297,6 +330,13 @@ document.body.appendChild(glitter);
     <a href="rakbuku.html">Rak Buku</a>
 </nav>
 
+<!-- Logo Section -->
+<div class="logo-section">
+    <div class="logo-wrapper">
+        <img src="ppliterasi.jpeg" alt="Literasi Kuy Logo">
+    </div>
+</div>
+
 <div class="judul">
 <h1>📚 Koleksi Buku</h1>
 <p>Pilih buku favoritmu dan simpan ke rak bacaan.</p>
@@ -387,10 +427,6 @@ alert("Buku sudah ada di rak.");
 }
 
 </script>
-<button onclick="simpanBuku('Danur','danur.pdf')">
-  Simpan ke Rak
-</button>
-
 
 </body>
 </html>
