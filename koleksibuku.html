@@ -105,6 +105,37 @@ color:#1d3557;
 margin-top:10px;
 }
 
+/* Search & Filter */
+.search-filter-section{
+text-align:center;
+margin:20px auto;
+}
+
+#searchInput, #kategoriFilter{
+padding:12px 15px;
+border:2px solid #ddd;
+border-radius:15px;
+font-size:16px;
+transition:0.3s;
+margin:10px;
+}
+
+#searchInput{
+width:80%;
+max-width:500px;
+}
+
+#kategoriFilter{
+width:auto;
+min-width:250px;
+}
+
+#searchInput:focus, #kategoriFilter:focus{
+outline:none;
+border-color:#667eea;
+box-shadow:0 0 10px rgba(102, 126, 234, 0.3);
+}
+
 /* Awan */
 
 .cloud{
@@ -229,6 +260,7 @@ box-shadow:
 0 0 15px white,
 0 0 25px white;
 animation:kelapkelip 2s infinite alternate;
+z-index:1;
 }
 
 @keyframes kelapkelip{
@@ -242,7 +274,7 @@ transform:scale(1.5);
 }
 }
 
-/* Buku */
+/* Buku Container */
 
 .container{
 width:90%;
@@ -256,32 +288,53 @@ position:relative;
 z-index:2;
 }
 
+/* Book Card */
 .book{
-background:rgba(255,255,255,0.9);
-padding:25px;
+background:rgba(255,255,255,0.95);
+padding:20px;
 border-radius:20px;
 box-shadow:0 10px 25px rgba(0,0,0,0.1);
 transition:0.4s;
+display:flex;
+flex-direction:column;
+overflow:hidden;
 }
 
 .book:hover{
 transform:translateY(-8px);
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.book img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:15px;
+margin-bottom:15px;
 }
 
 .book h3{
 color:#003566;
-margin-bottom:20px;
+margin-bottom:15px;
+font-size:1.1rem;
+line-height:1.4;
+flex-grow:1;
+}
+
+.book-buttons{
+display:flex;
+gap:10px;
 }
 
 .book button{
-width:100%;
+flex:1;
 padding:12px;
 border:none;
 border-radius:12px;
 cursor:pointer;
 font-weight:bold;
-margin-top:10px;
 transition:0.3s;
+font-size:14px;
 }
 
 .book button:first-of-type{
@@ -296,6 +349,53 @@ color:white;
 
 .book button:hover{
 transform:scale(1.04);
+opacity:0.9;
+}
+
+/* Empty State */
+.empty-message{
+text-align:center;
+grid-column:1 / -1;
+padding:60px 20px;
+color:#003566;
+font-size:1.2rem;
+}
+
+/* Responsive */
+@media(max-width:768px){
+.judul h1{
+font-size:32px;
+}
+
+#searchInput{
+width:90%;
+}
+
+#kategoriFilter{
+width:90%;
+}
+
+.container{
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+}
+
+.book{
+padding:15px;
+}
+
+.book img{
+height:200px;
+}
+
+.book h3{
+font-size:0.95rem;
+}
+
+.book button{
+font-size:12px;
+padding:10px;
+}
 }
 
 </style>
@@ -303,14 +403,12 @@ transform:scale(1.04);
 <body>
 
 <!-- Awan -->
-
 <div class="cloud cloud1"></div>
 <div class="cloud cloud2"></div>
 <div class="cloud cloud3"></div>
 <div class="cloud cloud4"></div>
 
 <!-- Glitter -->
-
 <script>
 for(let i=0;i<80;i++){
 let glitter=document.createElement("div");
@@ -323,7 +421,6 @@ document.body.appendChild(glitter);
 </script>
 
 <!-- Navbar -->
-
 <nav>
     <a href="beranda.html">Beranda</a>
     <a href="koleksibuku.html">Koleksi Buku</a>
@@ -340,24 +437,29 @@ document.body.appendChild(glitter);
 <div class="judul">
 <h1>📚 Koleksi Buku</h1>
 <p>Pilih buku favoritmu dan simpan ke rak bacaan.</p>
+</div>
 
-<input type="text" id="searchInput" placeholder="🔍 Cari buku..."
-style="width:80%;max-width:500px;padding:12px;border:none;border-radius:15px;margin-top:20px;">
+<!-- Search & Filter Section -->
+<div class="search-filter-section">
+<input type="text" id="searchInput" placeholder="🔍 Cari buku...">
 
-<select id="kategoriFilter"
-style="padding:12px;border:none;border-radius:15px;margin-top:15px;">
+<select id="kategoriFilter">
 <option value="semua">Semua Kategori</option>
-<option value="novel">Novel</option>
-<option value="parenting">Parenting & Pendidikan Anak</option>
-<option value="psikologi">Psikologi & Pengembangan Diri</option>
-<option value="bisnis">Bisnis & Manajemen</option>
-<option value="teknologi">Teknologi & Digital</option>
-<option value="kesehatan">Kesehatan</option>
-<option value="filsafat">Filsafat</option>
-<option value="agama">Agama</option>
-<option value="teknik">Teknik</option>
-<option value="sosial">Sosial</option>
+<option value="novel">📖 Novel</option>
+<option value="parenting">👨‍👩‍👧 Parenting & Pendidikan Anak</option>
+<option value="psikologi">🧠 Psikologi & Pengembangan Diri</option>
+<option value="bisnis">💼 Bisnis & Manajemen</option>
+<option value="teknologi">💻 Teknologi & Digital</option>
+<option value="kesehatan">🏥 Kesehatan</option>
+<option value="filsafat">🤔 Filsafat</option>
+<option value="agama">📿 Agama</option>
+<option value="teknik">⚙️ Teknik</option>
+<option value="sosial">🗣️ Sosial</option>
 </select>
+</div>
+
+<!-- Daftar Buku -->
+<div class="container" id="daftarBuku"></div>
 
 <script>
 
@@ -434,124 +536,6 @@ kategori:"novel"
 },
 
 {
-judul:"101 Kesalahan Dalam Mendidik Anak",
-file:"101mendidikdalammendidikanak.pdf",
-cover:"101kesalahamdalammendidikanak.png",
-kategori:"parenting"
-},
-
-{
-judul:"Menggali Potensi Anak Sejak Dini",
-file:"potensia.pdf",
-cover:"menggalipotensianaksejakdini.png",
-kategori:"parenting"
-},
-
-{
-judul:"Baca Buku Ini Saat Engkau Gagal",
-file:"lentera.pdf",
-cover:"bacabukuinisaatengkaugagal.png",
-kategori:"psikologi"
-},
-
-{
-judul:"Dark Psychology",
-file:"dark.pdf",
-cover:"dark.png",
-kategori:"psikologi"
-},
-
-{
-judul:"Nanti Juga Sembuh Sendiri",
-file:"nantijugasembuhsendiri.pdf",
-cover:"nantijugasembuhsendiri.png",
-kategori:"psikologi"
-},
-
-{
-judul:"Dasar-Dasar Manajemen Pendidikan",
-file:"manajemen.pdf",
-cover:"dasardasarmanajemenpendidikan.png",
-kategori:"bisnis"
-},
-
-{
-judul:"Influencer Digital Marketing",
-file:"influencerdigitalmarket.pdf",
-cover:"influencerdigitalmarketing.png",
-kategori:"bisnis"
-},
-
-{
-judul:"Strategi Promosi Pemasaran",
-file:"strategipromosi.pdf",
-cover:"strategipromosipemasaran.png",
-kategori:"bisnis"
-},
-
-{
-judul:"Desain Grafis",
-file:"desaingrafis.pdf",
-cover:"desaingrafis.png",
-kategori:"teknologi"
-},
-
-{
-judul:"5 Hari Jago Desain UI UX",
-file:"jagodesain.pdf",
-cover:"5harijagodesain.png",
-kategori:"teknologi"
-},
-
-{
-judul:"Mengenal Kesehatan Jiwa",
-file:"mengenalkesehatanjiwa.pdf",
-cover:"mengenalkesehatanjiwa.png",
-kategori:"kesehatan"
-},
-
-{
-judul:"Studi Filsafat 1",
-file:"filsafat1.pdf",
-cover:"studifilsafat1.png",
-kategori:"filsafat"
-},
-
-{
-judul:"Studi Filsafat 2",
-file:"filsafat2.pdf",
-cover:"studifilsafat2.png",
-kategori:"filsafat"
-},
-
-{
-judul:"La Tahzan",
-file:"latahzan.pdf",
-cover:"latahzan.png",
-kategori:"agama"
-},
-
-{
-judul:"Fihi Ma Fihi",
-file:"fihimafihi.pdf",
-cover:"fihimafihi.png",
-kategori:"agama"
-},
-
-{
-judul:"Neraka di Warung Kopi",
-file:"nerakadiwarungkopi.pdf",
-cover:"nerakadiwarungkopi.png",
-kategori:"sosial"
-},
-
-{
-judul:"Kuliah Itu Enggak Penting",
-file:"kuliahituenggakpenting.pdf",
-cover:"kuliahituenggakpenting.png",
-kategori:"sosial"
-},
-{
 judul:"Novel Brian",
 file:"novelbrian.pdf",
 cover:"23:59.png",
@@ -587,6 +571,20 @@ kategori:"novel"
 },
 
 {
+judul:"101 Kesalahan Dalam Mendidik Anak",
+file:"101mendidikdalammendidikanak.pdf",
+cover:"101kesalahamdalammendidikanak.png",
+kategori:"parenting"
+},
+
+{
+judul:"Menggali Potensi Anak Sejak Dini",
+file:"potensia.pdf",
+cover:"menggalipotensianaksejakdini.png",
+kategori:"parenting"
+},
+
+{
 judul:"3 Menit Membuat Anak Keranjingan Belajar",
 file:"cendekia.pdf",
 cover:"3menitmebuatanakkeranjinganbelajar.png",
@@ -615,6 +613,13 @@ kategori:"parenting"
 },
 
 {
+judul:"Baca Buku Ini Saat Engkau Gagal",
+file:"lentera.pdf",
+cover:"bacabukuinisaatengkaugagal.png",
+kategori:"psikologi"
+},
+
+{
 judul:"Aristoteles Inspirasi dan Pencerahan Hidup untuk Lebih Bermakna",
 file:"aristoteles.pdf",
 cover:"aristotelesinspirasidanpencerahanuntukhiduplebihbermakna.png",
@@ -632,6 +637,20 @@ kategori:"psikologi"
 judul:"Gak Capek Dituntut Mulu",
 file:"gakcapekdituntutmulu.pdf",
 cover:"gakcapek dituntutmulu.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Dark Psychology",
+file:"dark.pdf",
+cover:"dark.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Nanti Juga Sembuh Sendiri",
+file:"nantijugasembuhsendiri.pdf",
+cover:"nantijugasembuhsendiri.png",
 kategori:"psikologi"
 },
 
@@ -682,70 +701,221 @@ judul:"Seni Berbicara kepada Siapa, Kapan Saja, di Mana Saja",
 file:"seniberbicara.pdf",
 cover:"seniberbicara.png",
 kategori:"psikologi"
+},
+
+{
+judul:"Dasar-Dasar Manajemen Pendidikan",
+file:"manajemen.pdf",
+cover:"dasardasarmanajemenpendidikan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Kewirausahaan",
+file:"kewirausahaan.pdf",
+cover:"kewirausahaan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Pemasaran",
+file:"pemasaran.pdf",
+cover:"pemasarandankepuasanpelanggan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Strategi Promosi Pemasaran",
+file:"strategipromosi.pdf",
+cover:"strategipromosipemasaran.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Influencer Digital Marketing",
+file:"influencerdigitalmarket.pdf",
+cover:"influencerdigitalmarketing.png",
+kategori:"bisnis"
+},
+
+{
+judul:"10 Strategi Manajemen Terdahsyat di Dunia",
+file:"manajemen10strategi.pdf",
+cover:"manajemen.jpeg",
+kategori:"bisnis"
+},
+
+{
+judul:"The Psychology of Money",
+file:"money.pdf",
+cover:"psykologyofmoney.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Bisnis Ala Nabi",
+file:"bisnis.pdf",
+cover:"bisnis.jpeg",
+kategori:"bisnis"
+},
+
+{
+judul:"Orang Kaya di Negeri Miskin",
+file:"orangkayadinegerimiskin.pdf",
+cover:"orangkayadinegerimiskin.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Buku Sakti Excel untuk Bisnis dan Perkantoran",
+file:"bukusaktiexcel.pdf",
+cover:"bukusaktiexceluntukbisnisdanperkantoran.png",
+kategori:"teknologi"
+},
+
+{
+judul:"Desain Grafis",
+file:"desaingrafis.pdf",
+cover:"desaingrafis.png",
+kategori:"teknologi"
+},
+
+{
+judul:"5 Hari Jago Desain UI UX",
+file:"jagodesain.pdf",
+cover:"5harijagodesain.png",
+kategori:"teknologi"
+},
+
+{
+judul:"Teknik Mahir Berbicara di Depan Publik",
+file:"berbicara.pdf",
+cover:"teknikmahirberbicara.jpeg",
+kategori:"teknologi"
+},
+
+{
+judul:"Buku Ajar Anatomi",
+file:"anatomi.pdf",
+cover:"anatomidanfisiologimanusia.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Ilmu Kesehatan Masyarakat",
+file:"kesehatan.pdf",
+cover:"ilmukesehatanmasyarakat.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Mengenal Kesehatan Jiwa",
+file:"mengenalkesehatanjiwa.pdf",
+cover:"mengenalkesehatanjiwa.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Studi Filsafat 1",
+file:"filsafat1.pdf",
+cover:"studifilsafat1.png",
+kategori:"filsafat"
+},
+
+{
+judul:"Studi Filsafat 2",
+file:"filsafat2.pdf",
+cover:"studifilsafat2.png",
+kategori:"filsafat"
+},
+
+{
+judul:"Madilog",
+file:"madilog.pdf",
+cover:"madilogtanmalaka.png",
+kategori:"filsafat"
+},
+
+{
+judul:"La Tahzan",
+file:"latahzan.pdf",
+cover:"latahzan.png",
+kategori:"agama"
+},
+
+{
+judul:"Fihi Ma Fihi",
+file:"fihimafihi.pdf",
+cover:"fihimafihi.png",
+kategori:"agama"
+},
+
+{
+judul:"Dhammacitta 7 Langkah",
+file:"7langkah.pdf",
+cover:"7langkahdharmamenjadibenarbenarkaya.png",
+kategori:"agama"
+},
+
+{
+judul:"Cut Muthia Rekayasa Genetika",
+file:"rekayasa.pdf",
+cover:"pengantarrekayasagenetika.png",
+kategori:"teknik"
+},
+
+{
+judul:"Neraka di Warung Kopi",
+file:"nerakadiwarungkopi.pdf",
+cover:"nerakadiwarungkopi.png",
+kategori:"sosial"
+},
+
+{
+judul:"Kuliah Itu Enggak Penting",
+file:"kuliahituenggakpenting.pdf",
+cover:"kuliahituenggakpenting.png",
+kategori:"sosial"
 }
+
 ];
 
 function tampilkanBuku(){
-
-let cari =
-document.getElementById("searchInput").value.toLowerCase();
-
-let kategori =
-document.getElementById("kategoriFilter").value;
-
+let cari = document.getElementById("searchInput").value.toLowerCase();
+let kategori = document.getElementById("kategoriFilter").value;
 let html = "";
 
 buku.forEach(item=>{
-
-let cocokJudul =
-item.judul.toLowerCase().includes(cari);
-
-let cocokKategori =
-kategori==="semua" ||
-item.kategori===kategori;
+let cocokJudul = item.judul.toLowerCase().includes(cari);
+let cocokKategori = kategori==="semua" || item.kategori===kategori;
 
 if(cocokJudul && cocokKategori){
-
 html += `
 <div class="book">
-
-<img src="${item.cover}"
-style="width:100%;height:280px;object-fit:cover;border-radius:15px;">
-
+<img src="${item.cover}" alt="${item.judul}" onerror="this.src='https://via.placeholder.com/280x280?text=${encodeURIComponent(item.judul)}'">
 <h3>${item.judul}</h3>
-
-<button onclick="simpanBuku('${item.judul}','${item.file}')">
-Simpan ke Rak
-</button>
-
-<button onclick="bukaBuku('${item.file}')">
-📖 Baca Buku
-</button>
-
+<div class="book-buttons">
+<button onclick="simpanBuku('${item.judul.replace(/'/g, "\\'")}')">💾 Simpan</button>
+<button onclick="bukaBuku('${item.file}')">📖 Baca</button>
+</div>
 </div>
 `;
-
 }
-
 });
 
-document.getElementById("daftarBuku").innerHTML = html;
-
+if(html === ""){
+html = "<div class='empty-message'>📚 Tidak ada buku yang sesuai dengan pencarian Anda</div>";
 }
 
-document.getElementById("searchInput")
-.addEventListener("keyup", tampilkanBuku);
+document.getElementById("daftarBuku").innerHTML = html;
+}
 
-document.getElementById("kategoriFilter")
-.addEventListener("change", tampilkanBuku);
+document.getElementById("searchInput").addEventListener("keyup", tampilkanBuku);
+document.getElementById("kategoriFilter").addEventListener("change", tampilkanBuku);
 
 tampilkanBuku();
 
 </script>
-
-<div class="container" id="daftarBuku"></div>
-
-</div>
 
 <script>
 
@@ -753,18 +923,16 @@ function bukaBuku(file){
 window.open(file,"_blank");
 }
 
-function simpan(judul){
-
+function simpanBuku(judul){
 let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
 
 if(!rak.includes(judul)){
 rak.push(judul);
 localStorage.setItem("rakBuku",JSON.stringify(rak));
-alert("Buku berhasil disimpan ke rak!");
+alert("✅ Buku '" + judul + "' berhasil disimpan ke rak!");
 }else{
-alert("Buku sudah ada di rak.");
+alert("⚠️ Buku sudah ada di rak.");
 }
-
 }
 
 </script>
