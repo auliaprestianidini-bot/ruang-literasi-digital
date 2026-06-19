@@ -234,8 +234,8 @@ nav a:hover{
 }
 
 .daftarRak-list li{
-    padding:12px;
-    margin:8px 0;
+    padding:15px;
+    margin:10px 0;
     background:linear-gradient(135deg, #4cc9f0 0%, #0096c7 100%);
     color:white;
     border-radius:8px;
@@ -243,38 +243,55 @@ nav a:hover{
     justify-content:space-between;
     align-items:center;
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.daftarRak-list li:hover{
+    transform:translateX(5px);
+    box-shadow:0 6px 12px rgba(0,0,0,0.2);
 }
 
 .daftarRak-list li span{
     flex:1;
+    font-weight:500;
 }
 
 .daftarRak-list li div{
     display:flex;
-    gap:5px;
+    gap:8px;
 }
 
 .daftarRak-list li div button{
     background:rgba(255,255,255,0.3);
     border:none;
     color:white;
-    padding:6px 12px;
-    border-radius:5px;
+    padding:8px 15px;
+    border-radius:6px;
     cursor:pointer;
     font-weight:bold;
     transition:0.3s;
-    font-size:0.85rem;
+    font-size:0.9rem;
+    display:flex;
+    align-items:center;
+    gap:5px;
 }
 
 .daftarRak-list li div button:hover{
-    background:rgba(255,255,255,0.5);
+    background:rgba(255,255,255,0.6);
+    transform:scale(1.05);
 }
 
 .kosong{
     text-align:center;
     color:#666;
-    padding:20px;
+    padding:40px;
     font-style:italic;
+    font-size:1.1rem;
+}
+
+.kosong-icon{
+    font-size:3rem;
+    margin-bottom:15px;
 }
 
 /* Footer */
@@ -285,6 +302,37 @@ nav a:hover{
     font-size:14px;
     position:relative;
     z-index:2;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .hero h1{
+        font-size:2rem;
+    }
+    
+    nav{
+        padding:10px 20px;
+        font-size:0.9rem;
+    }
+    
+    nav a{
+        margin:0 10px;
+    }
+    
+    .daftarRak-list li{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+    
+    .daftarRak-list li div{
+        width:100%;
+    }
+    
+    .daftarRak-list li div button{
+        flex:1;
+        justify-content:center;
+    }
 }
 </style>
 </head>
@@ -379,8 +427,79 @@ for(let i=0;i<50;i++){
 <!-- Script -->
 <script>
 
+// Data buku untuk referensi (sama seperti di koleksibuku.html)
+const bukuDatabase = [
+{judul:"Milea Suara Dari Dilan",file:"milea.pdf"},
+{judul:"Catatan Harian Menantu Sinting",file:"absurd.pdf"},
+{judul:"Bukan Jodohnya yang Tak Kunjung Datang",file:"bukanjodohnya.pdf"},
+{judul:"Cinta 4 Sisi",file:"cinta4sisi.pdf"},
+{judul:"Cinta di Ujung Batas",file:"cintadiujungbatas.pdf"},
+{judul:"Danur",file:"danur.pdf"},
+{judul:"Rasuk",file:"rasuk.pdf"},
+{judul:"Tentang Kamu",file:"tentangkamu.pdf"},
+{judul:"Gigi Koko",file:"gigikoko.pdf"},
+{judul:"Delapan Enam",file:"delapanenam.pdf"},
+{judul:"23:59 Sebuah Novel Brian",file:"novelbrian.pdf"},
+{judul:"Syahadat Cinta",file:"syahadatcinta.pdf"},
+{judul:"Daun Yang Jatuh Tak Pernah Membenci Angin",file:"daun.pdf"},
+{judul:"Sungguh Kau Boleh Pergi",file:"boleh.pdf"},
+{judul:"Hujan",file:"hujan.pdf"},
+{judul:"101 Kesalahan Dalam Mendidik Anak",file:"salinan101kesalahandalammendidikanak.pdf"},
+{judul:"Menggali Potensi Anak Sejak Dini",file:"potensia.pdf"},
+{judul:"3 Menit Membuat Anak Keranjingan Belajar",file:"cendekia.pdf"},
+{judul:"1001 Cara Bicara Orang Tua Kepada Remaja",file:"jembatan.pdf"},
+{judul:"Aneka Makanan dan Minuman untuk Mencerdaskan Otak Bayi",file:"goldenia.pdf"},
+{judul:"Kajian Dampak Penggunaan Media Sosial bagi Anak dan Remaja",file:"remajanet.pdf"},
+{judul:"Baca Buku Ini Saat Engkau Gagal",file:"lentera.pdf"},
+{judul:"Aristoteles Inspirasi dan Pencerahan Hidup untuk Lebih Bermakna",file:"aristoteles.pdf"},
+{judul:"Membaca Ekspresi Wajah",file:"mimika.pdf"},
+{judul:"Gak Capek Dituntut Mulu",file:"gakcapekdituntutmulu.pdf"},
+{judul:"Dark Psychology",file:"dark.pdf"},
+{judul:"Nanti Juga Sembuh Sendiri",file:"nantijugasembuhsendiri.pdf"},
+{judul:"Bilang Begini Maksudnya Begitu",file:"bilangbeginimaksudnyabegitu.pdf"},
+{judul:"Rahasia Magnet Rezeki",file:"rahasiamagnetrezeki.pdf"},
+{judul:"Berdamai dengan Rasa Malas",file:"berdamaidenganrasamalas.pdf"},
+{judul:"Emotional Intelligence Itu DIPRAKTEKIN",file:"etonial.pdf"},
+{judul:"Self Knowledge",file:"self.pdf"},
+{judul:"Sebuah Seni untuk Bersikap Bodo Amat",file:"sebuahseniuntukbersikapbodoamat.pdf"},
+{judul:"Seni Berbicara kepada Siapa, Kapan Saja, di Mana Saja",file:"seniberbicara.pdf"},
+{judul:"Dasar-Dasar Manajemen Pendidikan",file:"manajemen.pdf"},
+{judul:"Kewirausahaan",file:"kewirausahaan.pdf"},
+{judul:"Pemasaran",file:"pemasaran.pdf"},
+{judul:"Strategi Promosi Pemasaran",file:"strategipromosi.pdf"},
+{judul:"Influencer Digital Marketing",file:"influencerdigitalmarket.pdf"},
+{judul:"10 Strategi Manajemen Terdahsyat di Dunia",file:"manajemen10strategi.pdf"},
+{judul:"The Psychology of Money",file:"money.pdf"},
+{judul:"Bisnis Ala Nabi",file:"bisnis.pdf"},
+{judul:"Orang Kaya di Negeri Miskin",file:"orangkayadinegerimiskin.pdf"},
+{judul:"Buku Sakti Excel untuk Bisnis dan Perkantoran",file:"bukusaktiexcel.pdf"},
+{judul:"Desain Grafis",file:"desaingrafis.pdf"},
+{judul:"5 Hari Jago Desain UI UX",file:"jagodesain.pdf"},
+{judul:"Teknik Mahir Berbicara di Depan Publik",file:"berbicara.pdf"},
+{judul:"Buku Ajar Anatomi",file:"anatomi.pdf"},
+{judul:"Ilmu Kesehatan Masyarakat",file:"kesehatan.pdf"},
+{judul:"Mengenal Kesehatan Jiwa",file:"mengenalkesehatanjiwa.pdf"},
+{judul:"Studi Filsafat 1",file:"filsafat1.pdf"},
+{judul:"Studi Filsafat 2",file:"filsafat2.pdf"},
+{judul:"Madilog",file:"madilog.pdf"},
+{judul:"La Tahzan",file:"latahzan.pdf"},
+{judul:"Fihi Ma Fihi",file:"fihimafihi.pdf"},
+{judul:"Dhammacitta 7 Langkah",file:"7langkah.pdf"},
+{judul:"Cut Muthia Rekayasa Genetika",file:"rekayasa.pdf"},
+{judul:"Neraka di Warung Kopi",file:"nerakadiwarungkopi.pdf"},
+{judul:"Kuliah Itu Enggak Penting",file:"kuliahituenggakpenting.pdf"}
+];
+
+// Fungsi untuk mendapatkan file dari judul buku
+function getFileFromJudul(judul){
+    const buku = bukuDatabase.find(b => b.judul === judul);
+    return buku ? buku.file : null;
+}
+
 function bukaBuku(file){
-    window.open(file,"_blank");
+    if(file){
+        window.open(file,"_blank");
+    }
 }
 
 function tampilkanRakBuku(){
@@ -390,19 +509,20 @@ function tampilkanRakBuku(){
     daftarRak.innerHTML = "";
     
     if(rak.length === 0){
-        daftarRak.innerHTML = '<p class="kosong">Belum ada buku yang disimpan. Kunjungi Koleksi Buku untuk menambahkan! 📚</p>';
+        daftarRak.innerHTML = '<div class="kosong"><div class="kosong-icon">📚</div><p>Belum ada buku yang disimpan.<br>Kunjungi Koleksi Buku untuk menambahkan!</p></div>';
         return;
     }
     
     let ul = document.createElement("ul");
     ul.className = "daftarRak-list";
     
-    rak.forEach((buku, index) => {
+    rak.forEach((judulBuku, index) => {
+        let file = getFileFromJudul(judulBuku);
         let li = document.createElement("li");
         li.innerHTML = `
-            <span>${index + 1}. ${buku.judul}</span>
+            <span><strong>${index + 1}.</strong> ${judulBuku}</span>
             <div>
-                <button onclick="bukaBuku('${buku.file}')">📖 Baca</button>
+                <button onclick="bukaBuku('${file}')">📖 Baca</button>
                 <button onclick="hapusBuku(${index})">❌ Hapus</button>
             </div>
         `;
@@ -414,10 +534,11 @@ function tampilkanRakBuku(){
 
 function hapusBuku(index){
     let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+    let bukuDihapus = rak[index];
     rak.splice(index, 1);
     localStorage.setItem("rakBuku", JSON.stringify(rak));
     tampilkanRakBuku();
-    alert("Buku berhasil dihapus dari rak!");
+    alert("✅ Buku '" + bukuDihapus + "' berhasil dihapus dari rak!");
 }
 
 // Tampilkan rak buku saat halaman dimuat
@@ -429,4 +550,4 @@ window.addEventListener("focus", tampilkanRakBuku);
 </script>
 
 </body>
-</html>
+</html
