@@ -217,7 +217,7 @@ nav a:hover{
     border-radius:15px;
     padding:30px;
     margin:40px auto;
-    max-width:800px;
+    max-width:900px;
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
     position:relative;
     z-index:2;
@@ -245,7 +245,16 @@ nav a:hover{
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
-.daftarRak-list li button{
+.daftarRak-list li span{
+    flex:1;
+}
+
+.daftarRak-list li div{
+    display:flex;
+    gap:5px;
+}
+
+.daftarRak-list li div button{
     background:rgba(255,255,255,0.3);
     border:none;
     color:white;
@@ -254,9 +263,10 @@ nav a:hover{
     cursor:pointer;
     font-weight:bold;
     transition:0.3s;
+    font-size:0.85rem;
 }
 
-.daftarRak-list li button:hover{
+.daftarRak-list li div button:hover{
     background:rgba(255,255,255,0.5);
 }
 
@@ -366,13 +376,18 @@ for(let i=0;i<50;i++){
     © 2026 Ruang Literasi Digital
 </div>
 
-<!-- Script untuk menampilkan buku dari localStorage -->
+<!-- Script -->
 <script>
+
+function bukaBuku(file){
+    window.open(file,"_blank");
+}
+
 function tampilkanRakBuku(){
     let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
     let daftarRak = document.getElementById("daftarRak");
     
-    daftarRak.innerHTML = ""; // Kosongkan terlebih dahulu
+    daftarRak.innerHTML = "";
     
     if(rak.length === 0){
         daftarRak.innerHTML = '<p class="kosong">Belum ada buku yang disimpan. Kunjungi Koleksi Buku untuk menambahkan! 📚</p>';
@@ -382,11 +397,14 @@ function tampilkanRakBuku(){
     let ul = document.createElement("ul");
     ul.className = "daftarRak-list";
     
-    rak.forEach((judul, index) => {
+    rak.forEach((buku, index) => {
         let li = document.createElement("li");
         li.innerHTML = `
-            <span>${index + 1}. ${judul}</span>
-            <button onclick="hapusBuku(${index})">❌ Hapus</button>
+            <span>${index + 1}. ${buku.judul}</span>
+            <div>
+                <button onclick="bukaBuku('${buku.file}')">📖 Baca</button>
+                <button onclick="hapusBuku(${index})">❌ Hapus</button>
+            </div>
         `;
         ul.appendChild(li);
     });
@@ -398,7 +416,7 @@ function hapusBuku(index){
     let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
     rak.splice(index, 1);
     localStorage.setItem("rakBuku", JSON.stringify(rak));
-    tampilkanRakBuku(); // Refresh tampilan
+    tampilkanRakBuku();
     alert("Buku berhasil dihapus dari rak!");
 }
 
@@ -407,6 +425,7 @@ document.addEventListener("DOMContentLoaded", tampilkanRakBuku);
 
 // Refresh otomatis setiap kali tab/window aktif kembali
 window.addEventListener("focus", tampilkanRakBuku);
+
 </script>
 
 </body>
