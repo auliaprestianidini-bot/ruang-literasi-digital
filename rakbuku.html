@@ -168,7 +168,7 @@ nav a:hover{
 .rak-container{
     display:flex;
     justify-content:center;
-    padding:60px 20px 120px;
+    padding:60px 20px 40px;
     position:relative;
     z-index:2;
 }
@@ -210,6 +210,62 @@ nav a:hover{
 .b6{height:130px;background:#ff922b;}
 .b7{height:115px;background:#f06595;}
 .b8{height:95px;background:#20c997;}
+
+/* Daftar Rak Buku */
+.daftarRak-container{
+    background:rgba(255,255,255,0.95);
+    border-radius:15px;
+    padding:30px;
+    margin:40px auto;
+    max-width:800px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    position:relative;
+    z-index:2;
+}
+
+.daftarRak-container h2{
+    color:#0d3b66;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+.daftarRak-list{
+    list-style:none;
+}
+
+.daftarRak-list li{
+    padding:12px;
+    margin:8px 0;
+    background:linear-gradient(135deg, #4cc9f0 0%, #0096c7 100%);
+    color:white;
+    border-radius:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+.daftarRak-list li button{
+    background:rgba(255,255,255,0.3);
+    border:none;
+    color:white;
+    padding:6px 12px;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.daftarRak-list li button:hover{
+    background:rgba(255,255,255,0.5);
+}
+
+.kosong{
+    text-align:center;
+    color:#666;
+    padding:20px;
+    font-style:italic;
+}
 
 /* Footer */
 .footer{
@@ -300,11 +356,58 @@ for(let i=0;i<50;i++){
     </div>
 </div>
 
+<!-- Daftar Buku yang Disimpan -->
+<div class="daftarRak-container">
+    <h2>📖 Buku Saya</h2>
+    <div id="daftarRak"></div>
+</div>
+
 <div class="footer">
     © 2026 Ruang Literasi Digital
 </div>
-<div id="daftarRak"></div>
 
+<!-- Script untuk menampilkan buku dari localStorage -->
+<script>
+function tampilkanRakBuku(){
+    let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+    let daftarRak = document.getElementById("daftarRak");
+    
+    daftarRak.innerHTML = ""; // Kosongkan terlebih dahulu
+    
+    if(rak.length === 0){
+        daftarRak.innerHTML = '<p class="kosong">Belum ada buku yang disimpan. Kunjungi Koleksi Buku untuk menambahkan! 📚</p>';
+        return;
+    }
+    
+    let ul = document.createElement("ul");
+    ul.className = "daftarRak-list";
+    
+    rak.forEach((judul, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = `
+            <span>${index + 1}. ${judul}</span>
+            <button onclick="hapusBuku(${index})">❌ Hapus</button>
+        `;
+        ul.appendChild(li);
+    });
+    
+    daftarRak.appendChild(ul);
+}
+
+function hapusBuku(index){
+    let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+    rak.splice(index, 1);
+    localStorage.setItem("rakBuku", JSON.stringify(rak));
+    tampilkanRakBuku(); // Refresh tampilan
+    alert("Buku berhasil dihapus dari rak!");
+}
+
+// Tampilkan rak buku saat halaman dimuat
+document.addEventListener("DOMContentLoaded", tampilkanRakBuku);
+
+// Refresh otomatis setiap kali tab/window aktif kembali
+window.addEventListener("focus", tampilkanRakBuku);
+</script>
 
 </body>
 </html>
