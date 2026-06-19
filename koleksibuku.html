@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -473,13 +474,6 @@ kategori:"novel"
 },
 
 {
-judul:"Catatan Harian Menantu Sinting",
-file:"absurd.pdf",
-cover:"catatanharianmenantusinting.png",
-kategori:"novel"
-},
-
-{
 judul:"Bukan Jodohnya yang Tak Kunjung Datang",
 file:"bukanjodohnya.pdf",
 cover:"bukanjodohnyayangtakkunjungdatang.png",
@@ -529,51 +523,30 @@ kategori:"novel"
 },
 
 {
-judul:"Delapan Enam",
-file:"delapanenam.pdf",
-cover:"sebuahnovel86.png",
-kategori:"novel"
-},
-
-{
-judul:"Novel Brian",
-file:"novelbrian.pdf",
-cover:"23:59.png",
-kategori:"novel"
-},
-
-{
 judul:"Syahadah Cinta",
-file:"syahadahcinta.pdf",
-cover:"syahadahcinta.png",
+file:"syahadatcinta.pdf",
+cover:"syahadatcinta.png",
 kategori:"novel"
 },
 
 {
 judul:"Daun Yang Jatuh Tak Pernah Membenci Angin",
 file:"daun.pdf",
-cover:"daunyangjatuh.png",
-kategori:"novel"
-},
-
-{
-judul:"Sungguh Kau Boleh Pergi",
-file:"sungguhkaubolehpergi.pdf",
-cover:"sungguhkaubolehpergi.png",
+cover:"daunyangjatuh.jpeg",
 kategori:"novel"
 },
 
 {
 judul:"Hujan",
 file:"hujan.pdf",
-cover:"hujan.png",
+cover:"hujan.jpeg",
 kategori:"novel"
 },
 
 {
 judul:"101 Kesalahan Dalam Mendidik Anak",
-file:"101mendidikdalammendidikanak.pdf",
-cover:"101kesalahamdalammendidikanak.png",
+file:"101kesalahandalammendidik anak.pdf",
+cover:"101kesalahandalammendidikanak.png",
 kategori:"parenting"
 },
 
@@ -581,13 +554,6 @@ kategori:"parenting"
 judul:"Menggali Potensi Anak Sejak Dini",
 file:"potensia.pdf",
 cover:"menggalipotensianaksejakdini.png",
-kategori:"parenting"
-},
-
-{
-judul:"3 Menit Membuat Anak Keranjingan Belajar",
-file:"cendekia.pdf",
-cover:"3menitmebuatanakkeranjinganbelajar.png",
 kategori:"parenting"
 },
 
@@ -629,21 +595,21 @@ kategori:"psikologi"
 {
 judul:"Membaca Ekspresi Wajah",
 file:"mimika.pdf",
-cover:"Membaca Ekspresi Wajah.png",
+cover:"membacaekspresiwajah.png",
 kategori:"psikologi"
 },
 
 {
 judul:"Gak Capek Dituntut Mulu",
-file:"gakcapekdituntutmulu.pdf",
-cover:"gakcapek dituntutmulu.png",
+file:"gakcapekdituntut mulu.pdf",
+cover:"gakcapedituntutmulu.png",
 kategori:"psikologi"
 },
 
 {
 judul:"Dark Psychology",
 file:"dark.pdf",
-cover:"darkpschology.png",
+cover:"dark.jpeg",
 kategori:"psikologi"
 },
 
@@ -677,7 +643,7 @@ kategori:"psikologi"
 
 {
 judul:"Emotional Intelligence Itu DIPRAKTEKIN",
-file:"etonial.pdf",
+file:"emotional.pdf",
 cover:"emotional.jpeg",
 kategori:"psikologi"
 },
@@ -685,7 +651,7 @@ kategori:"psikologi"
 {
 judul:"Self Knowledge",
 file:"self.pdf",
-cover:"self.png",
+cover:"self.jpeg",
 kategori:"psikologi"
 },
 
@@ -698,7 +664,7 @@ kategori:"psikologi"
 
 {
 judul:"Seni Berbicara kepada Siapa, Kapan Saja, di Mana Saja",
-file:"seniberbicara.pdf",
+file:"berbicara.pdf",
 cover:"seniberbicara.png",
 kategori:"psikologi"
 },
@@ -740,7 +706,7 @@ kategori:"bisnis"
 
 {
 judul:"10 Strategi Manajemen Terdahsyat di Dunia",
-file:"manajemen10strategi.pdf",
+file:"manajemen.pdf",
 cover:"manajemen.jpeg",
 kategori:"bisnis"
 },
@@ -748,7 +714,7 @@ kategori:"bisnis"
 {
 judul:"The Psychology of Money",
 file:"money.pdf",
-cover:"psykologyofmoney.png",
+cover:"psykologyofmoney.jpeg",
 kategori:"bisnis"
 },
 
@@ -768,7 +734,7 @@ kategori:"bisnis"
 
 {
 judul:"Buku Sakti Excel untuk Bisnis dan Perkantoran",
-file:"bukusaktiexcel.pdf",
+file:"bukusaktiexel.pdf",
 cover:"bukusaktiexceluntukbisnisdanperkantoran.png",
 kategori:"teknologi"
 },
@@ -892,7 +858,7 @@ let cocokKategori = kategori==="semua" || item.kategori===kategori;
 if(cocokJudul && cocokKategori){
 html += `
 <div class="book">
-<img src="${item.cover}" alt="${item.judul}" onerror="this.src='https://via.placeholder.com/280x280?text=${encodeURIComponent(item.judul)}'">
+<img src="${item.cover}" alt="${item.judul}" onerror="this.src='https://via.placeholder.com/280x350?text=${encodeURIComponent(item.judul)}'">
 <h3>${item.judul}</h3>
 <div class="book-buttons">
 <button onclick="simpanBuku('${item.judul.replace(/'/g, "\\'")}')">💾 Simpan</button>
