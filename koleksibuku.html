@@ -4,81 +4,445 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Koleksi Buku - Ruang LiterasiKu</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{min-height:100vh;overflow-x:hidden;background:linear-gradient(180deg,#dff6ff 0%,#ffffff 45%,#5da9e9 75%,#003566 100%);}
-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);padding:18px;text-align:center;box-shadow:0 2px 15px rgba(0,0,0,0.1);}
-nav a{text-decoration:none;color:#003566;font-weight:bold;margin:0 20px;font-size:18px;transition:0.3s;}
-nav a:hover{color:#0077b6;}
-.logo-section{display:flex;align-items:center;gap:20px;padding:20px;padding-left:40px;}
-.logo-wrapper{width:140px;height:140px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.3) 40%, rgba(77,166,255,0.2));box-shadow:0 0 30px rgba(77,166,255,0.6),0 0 60px rgba(77,166,255,0.4),inset -2px -2px 8px rgba(0,0,0,0.1),inset 2px 2px 8px rgba(255,255,255,0.8);}
-.logo-wrapper img{width:130px;height:130px;border-radius:50%;object-fit:contain;}
-.judul{text-align:center;padding:50px 20px 30px;position:relative;z-index:2;}
-.judul h1{font-size:45px;color:#003566;}
-.judul p{font-size:18px;color:#1d3557;margin-top:10px;}
-.search-filter-section{text-align:center;margin:20px auto;}
-#searchInput,#kategoriFilter{padding:12px 15px;border:2px solid #ddd;border-radius:15px;font-size:16px;transition:0.3s;margin:10px;}
-#searchInput{width:80%;max-width:500px;}
-#kategoriFilter{width:auto;min-width:250px;}
-#searchInput:focus,#kategoriFilter:focus{outline:none;border-color:#667eea;box-shadow:0 0 10px rgba(102, 126, 234, 0.3);}
-.cloud{position:absolute;background:white;border-radius:100px;opacity:0.9;}
-.cloud:before,.cloud:after{content:"";position:absolute;background:white;border-radius:50%;}
-.cloud1{width:140px;height:50px;top:90px;animation:awan 35s linear infinite;}
-.cloud1:before{width:60px;height:60px;top:-30px;left:20px;}
-.cloud1:after{width:70px;height:70px;top:-35px;right:20px;}
-.cloud2{width:170px;height:60px;top:180px;animation:awan 50s linear infinite;animation-delay:-10s;}
-.cloud2:before{width:70px;height:70px;top:-30px;left:30px;}
-.cloud2:after{width:80px;height:80px;top:-40px;right:20px;}
-.cloud3{width:130px;height:50px;top:300px;animation:awan 42s linear infinite;}
-.cloud3:before{width:55px;height:55px;top:-25px;left:15px;}
-.cloud3:after{width:60px;height:60px;top:-30px;right:15px;}
-.cloud4{width:180px;height:60px;top:420px;animation:awan 55s linear infinite;}
-.cloud4:before{width:70px;height:70px;top:-30px;left:20px;}
-.cloud4:after{width:80px;height:80px;top:-40px;right:25px;}
-@keyframes awan{from{left:-250px;}to{left:110%;}}
-.glitter{position:fixed;width:4px;height:4px;background:white;border-radius:50%;box-shadow:0 0 8px white,0 0 15px white,0 0 25px white;animation:kelapkelip 2s infinite alternate;z-index:1;}
-@keyframes kelapkelip{from{opacity:0.2;transform:scale(0.8);}to{opacity:1;transform:scale(1.5);}}
-.container{width:90%;max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;padding-bottom:60px;position:relative;z-index:2;}
-.book{background:rgba(255,255,255,0.95);padding:20px;border-radius:20px;box-shadow:0 10px 25px rgba(0,0,0,0.1);transition:0.4s;display:flex;flex-direction:column;overflow:hidden;}
-.book:hover{transform:translateY(-8px);box-shadow:0 15px 35px rgba(0,0,0,0.2);}
-.book-cover-wrapper{width:100%;height:280px;border-radius:15px;margin-bottom:15px;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
-.book img{width:100%;height:100%;object-fit:cover;}
-.book-cover-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;text-align:center;padding:20px;font-size:0.9rem;line-height:1.4;}
-.book h3{color:#003566;margin-bottom:15px;font-size:1.1rem;line-height:1.4;flex-grow:1;}
-.book-buttons{display:flex;gap:10px;}
-.book button{flex:1;padding:12px;border:none;border-radius:12px;cursor:pointer;font-weight:bold;transition:0.3s;font-size:14px;}
-.book button:first-of-type{background:#4cc9f0;color:white;}
-.book button:last-of-type{background:#003566;color:white;}
-.book button:hover{transform:scale(1.04);opacity:0.9;}
-.empty-message{text-align:center;grid-column:1 / -1;padding:60px 20px;color:#003566;font-size:1.2rem;}
-@media(max-width:768px){.judul h1{font-size:32px;}#searchInput{width:90%;}#kategoriFilter{width:90%;}.container{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;}.book{padding:15px;}.book-cover-wrapper{height:200px;margin-bottom:10px;}.book h3{font-size:0.95rem;}.book button{font-size:12px;padding:10px;}}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+overflow-x:hidden;
+background:linear-gradient(
+180deg,
+#dff6ff 0%,
+#ffffff 45%,
+#5da9e9 75%,
+#003566 100%
+);
+}
+
+/* Navbar */
+
+nav{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(255,255,255,0.9);
+backdrop-filter:blur(10px);
+padding:18px;
+text-align:center;
+box-shadow:0 2px 15px rgba(0,0,0,0.1);
+}
+
+nav a{
+text-decoration:none;
+color:#003566;
+font-weight:bold;
+margin:0 20px;
+font-size:18px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#0077b6;
+}
+
+/* Logo Section */
+.logo-section{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:20px;
+    padding-left:40px;
+}
+
+.logo-wrapper{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.3) 40%, rgba(77,166,255,0.2));
+    box-shadow:
+        0 0 30px rgba(77,166,255,0.6),
+        0 0 60px rgba(77,166,255,0.4),
+        inset -2px -2px 8px rgba(0,0,0,0.1),
+        inset 2px 2px 8px rgba(255,255,255,0.8);
+}
+
+.logo-wrapper img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    object-fit:contain;
+}
+
+/* Judul */
+
+.judul{
+text-align:center;
+padding:50px 20px 30px;
+position:relative;
+z-index:2;
+}
+
+.judul h1{
+font-size:45px;
+color:#003566;
+}
+
+.judul p{
+font-size:18px;
+color:#1d3557;
+margin-top:10px;
+}
+
+/* Search & Filter */
+.search-filter-section{
+text-align:center;
+margin:20px auto;
+}
+
+#searchInput, #kategoriFilter{
+padding:12px 15px;
+border:2px solid #ddd;
+border-radius:15px;
+font-size:16px;
+transition:0.3s;
+margin:10px;
+}
+
+#searchInput{
+width:80%;
+max-width:500px;
+}
+
+#kategoriFilter{
+width:auto;
+min-width:250px;
+}
+
+#searchInput:focus, #kategoriFilter:focus{
+outline:none;
+border-color:#667eea;
+box-shadow:0 0 10px rgba(102, 126, 234, 0.3);
+}
+
+/* Awan */
+
+.cloud{
+position:absolute;
+background:white;
+border-radius:100px;
+opacity:0.9;
+}
+
+.cloud:before,
+.cloud:after{
+content:"";
+position:absolute;
+background:white;
+border-radius:50%;
+}
+
+.cloud1{
+width:140px;
+height:50px;
+top:90px;
+animation:awan 35s linear infinite;
+}
+
+.cloud1:before{
+width:60px;
+height:60px;
+top:-30px;
+left:20px;
+}
+
+.cloud1:after{
+width:70px;
+height:70px;
+top:-35px;
+right:20px;
+}
+
+.cloud2{
+width:170px;
+height:60px;
+top:180px;
+animation:awan 50s linear infinite;
+animation-delay:-10s;
+}
+
+.cloud2:before{
+width:70px;
+height:70px;
+top:-30px;
+left:30px;
+}
+
+.cloud2:after{
+width:80px;
+height:80px;
+top:-40px;
+right:20px;
+}
+
+.cloud3{
+width:130px;
+height:50px;
+top:300px;
+animation:awan 42s linear infinite;
+}
+
+.cloud3:before{
+width:55px;
+height:55px;
+top:-25px;
+left:15px;
+}
+
+.cloud3:after{
+width:60px;
+height:60px;
+top:-30px;
+right:15px;
+}
+
+.cloud4{
+width:180px;
+height:60px;
+top:420px;
+animation:awan 55s linear infinite;
+}
+
+.cloud4:before{
+width:70px;
+height:70px;
+top:-30px;
+left:20px;
+}
+
+.cloud4:after{
+width:80px;
+height:80px;
+top:-40px;
+right:25px;
+}
+
+@keyframes awan{
+from{
+left:-250px;
+}
+to{
+left:110%;
+}
+}
+
+/* Glitter */
+
+.glitter{
+position:fixed;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+box-shadow:
+0 0 8px white,
+0 0 15px white,
+0 0 25px white;
+animation:kelapkelip 2s infinite alternate;
+z-index:1;
+}
+
+@keyframes kelapkelip{
+from{
+opacity:0.2;
+transform:scale(0.8);
+}
+to{
+opacity:1;
+transform:scale(1.5);
+}
+}
+
+/* Buku Container */
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+padding-bottom:60px;
+position:relative;
+z-index:2;
+}
+
+/* Book Card */
+.book{
+background:rgba(255,255,255,0.95);
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+transition:0.4s;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+
+.book:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.book img{
+width:100%;
+height:280px;
+object-fit:cover;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.book h3{
+color:#003566;
+margin-bottom:15px;
+font-size:1.1rem;
+line-height:1.4;
+flex-grow:1;
+}
+
+.book-buttons{
+display:flex;
+gap:10px;
+}
+
+.book button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+font-size:14px;
+}
+
+.book button:first-of-type{
+background:#4cc9f0;
+color:white;
+}
+
+.book button:last-of-type{
+background:#003566;
+color:white;
+}
+
+.book button:hover{
+transform:scale(1.04);
+opacity:0.9;
+}
+
+/* Empty State */
+.empty-message{
+text-align:center;
+grid-column:1 / -1;
+padding:60px 20px;
+color:#003566;
+font-size:1.2rem;
+}
+
+/* Responsive */
+@media(max-width:768px){
+.judul h1{
+font-size:32px;
+}
+
+#searchInput{
+width:90%;
+}
+
+#kategoriFilter{
+width:90%;
+}
+
+.container{
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+}
+
+.book{
+padding:15px;
+}
+
+.book img{
+height:200px;
+}
+
+.book h3{
+font-size:0.95rem;
+}
+
+.book button{
+font-size:12px;
+padding:10px;
+}
+}
+
 </style>
 </head>
 <body>
+
+<!-- Awan -->
 <div class="cloud cloud1"></div>
 <div class="cloud cloud2"></div>
 <div class="cloud cloud3"></div>
 <div class="cloud cloud4"></div>
+
+<!-- Glitter -->
 <script>
-for(let i=0;i<80;i++){let glitter=document.createElement("div");glitter.className="glitter";glitter.style.left=Math.random()*100+"vw";glitter.style.top=Math.random()*100+"vh";glitter.style.animationDelay=Math.random()*3+"s";document.body.appendChild(glitter);}
+for(let i=0;i<80;i++){
+let glitter=document.createElement("div");
+glitter.className="glitter";
+glitter.style.left=Math.random()*100+"vw";
+glitter.style.top=Math.random()*100+"vh";
+glitter.style.animationDelay=Math.random()*3+"s";
+document.body.appendChild(glitter);
+}
 </script>
+
+<!-- Navbar -->
 <nav>
     <a href="beranda.html">Beranda</a>
     <a href="koleksibuku.html">Koleksi Buku</a>
     <a href="rakbuku.html">Rak Buku</a>
 </nav>
+
+<!-- Logo Section -->
 <div class="logo-section">
     <div class="logo-wrapper">
         <img src="ppliterasi.jpeg" alt="Literasi Kuy Logo">
     </div>
 </div>
+
 <div class="judul">
 <h1>📚 Koleksi Buku</h1>
 <p>Pilih buku favoritmu dan simpan ke rak bacaan.</p>
 </div>
+
+<!-- Search & Filter Section -->
 <div class="search-filter-section">
 <input type="text" id="searchInput" placeholder="🔍 Cari buku...">
+
 <select id="kategoriFilter">
 <option value="semua">Semua Kategori</option>
 <option value="novel">📖 Novel</option>
@@ -93,73 +457,485 @@ for(let i=0;i<80;i++){let glitter=document.createElement("div");glitter.classNam
 <option value="sosial">🗣️ Sosial</option>
 </select>
 </div>
+
+<!-- Daftar Buku -->
 <div class="container" id="daftarBuku"></div>
+
 <script>
+
 const buku = [
-{judul:"Milea Suara Dari Dilan",file:"milea.pdf",cover:"mileasuaradaridilan.png",kategori:"novel"},
-{judul:"Catatan Harian Menantu Sinting",file:"absurd.pdf",cover:"catatanharianmenantusinting.png",kategori:"novel"},
-{judul:"Bukan Jodohnya yang Tak Kunjung Datang",file:"bukanjodohnya.pdf",cover:"bukanjodohnyayangtakkunjungdatang.png",kategori:"novel"},
-{judul:"Cinta 4 Sisi",file:"cinta4sisi.pdf",cover:"cinta4sisi.png",kategori:"novel"},
-{judul:"Cinta di Ujung Batas",file:"cintadiujungbatas.pdf",cover:"cintadiujungbatas.png",kategori:"novel"},
-{judul:"Danur",file:"danur.pdf",cover:"danur.png",kategori:"novel"},
-{judul:"Rasuk",file:"rasuk.pdf",cover:"rasuk.png",kategori:"novel"},
-{judul:"Tentang Kamu",file:"tentangkamu.pdf",cover:"tentang_kamu.jpeg",kategori:"novel"},
-{judul:"Gigi Koko",file:"gigikoko.pdf",cover:"gigikoko.png",kategori:"novel"},
-{judul:"Delapan Enam",file:"delapanenam.pdf",cover:"sebuahnovel86.png",kategori:"novel"},
-{judul:"23:59 Sebuah Novel Brian",file:"novelbrian.pdf",cover:"23:59.png",kategori:"novel"},
-{judul:"Syahadat Cinta",file:"syahadatcinta.pdf",cover:"syahadatcinta.png",kategori:"novel"},
-{judul:"Daun Yang Jatuh Tak Pernah Membenci Angin",file:"daun.pdf",cover:"daunyangjatuh_tak pernah_membenciangin.pdf",kategori:"novel"},
-{judul:"Sungguh Kau Boleh Pergi",file:"boleh.pdf",cover:"boleh.jpeg",kategori:"novel"},
-{judul:"Hujan",file:"hujan.pdf",cover:"hujan.jpeg",kategori:"novel"},
-{judul:"101 Kesalahan Dalam Mendidik Anak",file:"salinan101kesalahandalammendidikanak.pdf",cover:"kesalahanmendidikanak.png",kategori:"parenting"},
-{judul:"Menggali Potensi Anak Sejak Dini",file:"potensia.pdf",cover:"menggalipotensianaksejakdini.png",kategori:"parenting"},
-{judul:"3 Menit Membuat Anak Keranjingan Belajar",file:"cendekia.pdf",cover:"cendekia.png",kategori:"parenting"},
-{judul:"1001 Cara Bicara Orang Tua Kepada Remaja",file:"jembatan.pdf",cover:"1001carabicaraorangtuakepadaremaja.png",kategori:"parenting"},
-{judul:"Aneka Makanan dan Minuman untuk Mencerdaskan Otak Bayi",file:"goldenia.pdf",cover:"anekamakanandanminumanuntukmencerdaskanotakbayi.png",kategori:"parenting"},
-{judul:"Kajian Dampak Penggunaan Media Sosial bagi Anak dan Remaja",file:"remajanet.pdf",cover:"kajiandampakpenggunaanmediasosialbagianakdanremaja.png",kategori:"parenting"},
-{judul:"Baca Buku Ini Saat Engkau Gagal",file:"lentera.pdf",cover:"bacabukuinisaatengkaugagal.png",kategori:"psikologi"},
-{judul:"Aristoteles Inspirasi dan Pencerahan Hidup untuk Lebih Bermakna",file:"aristoteles.pdf",cover:"aristotelesinspirasidanpencerahanuntukhiduplebihbermakna.png",kategori:"psikologi"},
-{judul:"Membaca Ekspresi Wajah",file:"mimika.pdf",cover:"mimika.png",kategori:"psikologi"},
-{judul:"Gak Capek Dituntut Mulu",file:"gakcapekdituntutmulu.pdf",cover:"gakcapek dituntutmulu.png",kategori:"psikologi"},
-{judul:"Dark Psychology",file:"dark.pdf",cover:"dark.jpeg",kategori:"psikologi"},
-{judul:"Nanti Juga Sembuh Sendiri",file:"nantijugasembuhsendiri.pdf",cover:"nantijugasembuhsendiri.png",kategori:"psikologi"},
-{judul:"Bilang Begini Maksudnya Begitu",file:"bilangbeginimaksudnyabegitu.pdf",cover:"bilangbeginimaksudnyabegitu.png",kategori:"psikologi"},
-{judul:"Rahasia Magnet Rezeki",file:"rahasiamagnetrezeki.pdf",cover:"rahasiamagnetrezeki.png",kategori:"psikologi"},
-{judul:"Berdamai dengan Rasa Malas",file:"berdamaidenganrasamalas.pdf",cover:"berdamaidenganrasamalas.png",kategori:"psikologi"},
-{judul:"Emotional Intelligence Itu DIPRAKTEKIN",file:"etonial.pdf",cover:"emotional.jpeg",kategori:"psikologi"},
-{judul:"Self Knowledge",file:"self.pdf",cover:"self.jpeg",kategori:"psikologi"},
-{judul:"Sebuah Seni untuk Bersikap Bodo Amat",file:"sebuahseniuntukbersikapbodoamat.pdf",cover:"sebuahseniuntukbersikapbodoamat.png",kategori:"psikologi"},
-{judul:"Seni Berbicara kepada Siapa, Kapan Saja, di Mana Saja",file:"seniberbicara.pdf",cover:"seniberbicara.png",kategori:"psikologi"},
-{judul:"Dasar-Dasar Manajemen Pendidikan",file:"manajemen.pdf",cover:"dasardasarmanajemenpendidikan.png",kategori:"bisnis"},
-{judul:"Kewirausahaan",file:"kewirausahaan.pdf",cover:"kewirausahaan.png",kategori:"bisnis"},
-{judul:"Pemasaran",file:"pemasaran.pdf",cover:"pemasarandankepuasanpelanggan.png",kategori:"bisnis"},
-{judul:"Strategi Promosi Pemasaran",file:"strategipromosi.pdf",cover:"strategipromosipemasaran.png",kategori:"bisnis"},
-{judul:"Influencer Digital Marketing",file:"influencerdigitalmarket.pdf",cover:"influencerdigitalmarketing.png",kategori:"bisnis"},
-{judul:"10 Strategi Manajemen Terdahsyat di Dunia",file:"manajemen10strategi.pdf",cover:"manajemen.jpeg",kategori:"bisnis"},
-{judul:"The Psychology of Money",file:"money.pdf",cover:"psykologyofmoney.png",kategori:"bisnis"},
-{judul:"Bisnis Ala Nabi",file:"bisnis.pdf",cover:"bisnis.jpeg",kategori:"bisnis"},
-{judul:"Orang Kaya di Negeri Miskin",file:"orangkayadinegerimiskin.pdf",cover:"orangkayadinegerimiskin.png",kategori:"bisnis"},
-{judul:"Buku Sakti Excel untuk Bisnis dan Perkantoran",file:"bukusaktiexcel.pdf",cover:"bukusaktiexceluntukbisnisdanperkantoran.png",kategori:"teknologi"},
-{judul:"Desain Grafis",file:"desaingrafis.pdf",cover:"desaingrafis.png",kategori:"teknologi"},
-{judul:"5 Hari Jago Desain UI UX",file:"jagodesain.pdf",cover:"5harijagodesain.png",kategori:"teknologi"},
-{judul:"Teknik Mahir Berbicara di Depan Publik",file:"berbicara.pdf",cover:"teknikmahirberbicara.jpeg",kategori:"teknologi"},
-{judul:"Buku Ajar Anatomi",file:"anatomi.pdf",cover:"anatomidanfisiologimanusia.png",kategori:"kesehatan"},
-{judul:"Ilmu Kesehatan Masyarakat",file:"kesehatan.pdf",cover:"ilmukesehatanmasyarakat.png",kategori:"kesehatan"},
-{judul:"Mengenal Kesehatan Jiwa",file:"mengenalkesehatanjiwa.pdf",cover:"kesehatanjiwa.png",kategori:"kesehatan"},
-{judul:"Studi Filsafat 1",file:"filsafat1.pdf",cover:"studifilsafat1.png",kategori:"filsafat"},
-{judul:"Studi Filsafat 2",file:"filsafat2.pdf",cover:"studifilsafat2.png",kategori:"filsafat"},
-{judul:"Madilog",file:"madilog.pdf",cover:"madilogtanmalaka.png",kategori:"filsafat"},
-{judul:"La Tahzan",file:"latahzan.pdf",cover:"latahzan.png",kategori:"agama"},
-{judul:"Fihi Ma Fihi",file:"fihimafihi.pdf",cover:"fihimafihi.png",kategori:"agama"},
-{judul:"Dhammacitta 7 Langkah",file:"7langkah.pdf",cover:"7langkahdharmamenjadibenarbenarkaya.png",kategori:"agama"},
-{judul:"Cut Muthia Rekayasa Genetika",file:"rekayasa.pdf",cover:"pengantarrekayasagenetika.png",kategori:"teknik"},
-{judul:"Neraka di Warung Kopi",file:"nerakadiwarungkopi.pdf",cover:"nerakadiwarungkopi.png",kategori:"sosial"},
-{judul:"Kuliah Itu Enggak Penting",file:"kuliahituenggakpenting.pdf",cover:"kuliahituenggakpenting.png",kategori:"sosial"}
+
+{
+judul:"Milea Suara Dari Dilan",
+file:"milea.pdf",
+cover:"mileasuaradaridilan.png",
+kategori:"novel"
+},
+
+{
+judul:"Catatan Harian Menantu Sinting",
+file:"absurd.pdf",
+cover:"catatanharianmenantusinting.png",
+kategori:"novel"
+},
+
+{
+judul:"Bukan Jodohnya yang Tak Kunjung Datang",
+file:"bukanjodohnya.pdf",
+cover:"bukanjodohnyayangtakkunjungdatang.png",
+kategori:"novel"
+},
+
+{
+judul:"Cinta 4 Sisi",
+file:"cinta4sisi.pdf",
+cover:"cinta4sisi.png",
+kategori:"novel"
+},
+
+{
+judul:"Cinta di Ujung Batas",
+file:"cintadiujungbatas.pdf",
+cover:"cintadiujungbatas.png",
+kategori:"novel"
+},
+
+{
+judul:"Danur",
+file:"danur.pdf",
+cover:"danur.png",
+kategori:"novel"
+},
+
+{
+judul:"Rasuk",
+file:"rasuk.pdf",
+cover:"rasuk.png",
+kategori:"novel"
+},
+
+{
+judul:"Tentang Kamu",
+file:"tentangkamu.pdf",
+cover:"tentang_kamu.jpeg",
+kategori:"novel"
+},
+
+{
+judul:"Gigi Koko",
+file:"gigikoko.pdf",
+cover:"gigikoko.png",
+kategori:"novel"
+},
+
+{
+judul:"Delapan Enam",
+file:"delapanenam.pdf",
+cover:"sebuahnovel86.png",
+kategori:"novel"
+},
+
+{
+judul:"Novel Brian",
+file:"novelbrian.pdf",
+cover:"23:59.png",
+kategori:"novel"
+},
+
+{
+judul:"Syahadah Cinta",
+file:"syahadahcinta.pdf",
+cover:"syahadahcinta.png",
+kategori:"novel"
+},
+
+{
+judul:"Daun Yang Jatuh Tak Pernah Membenci Angin",
+file:"daun.pdf",
+cover:"daunyangjatuh_takpernah_membenciangin.png",
+kategori:"novel"
+},
+
+{
+judul:"Sungguh Kau Boleh Pergi",
+file:"sungguhkaubolehpergi.pdf",
+cover:"sungguhkaubolehpergi.png",
+kategori:"novel"
+},
+
+{
+judul:"Hujan",
+file:"hujan.pdf",
+cover:"hujan.png",
+kategori:"novel"
+},
+
+{
+judul:"101 Kesalahan Dalam Mendidik Anak",
+file:"101mendidikdalammendidikanak.pdf",
+cover:"101kesalahamdalammendidikanak.png",
+kategori:"parenting"
+},
+
+{
+judul:"Menggali Potensi Anak Sejak Dini",
+file:"potensia.pdf",
+cover:"menggalipotensianaksejakdini.png",
+kategori:"parenting"
+},
+
+{
+judul:"3 Menit Membuat Anak Keranjingan Belajar",
+file:"cendekia.pdf",
+cover:"3menitmebuatanakkeranjinganbelajar.png",
+kategori:"parenting"
+},
+
+{
+judul:"1001 Cara Bicara Orang Tua Kepada Remaja",
+file:"jembatan.pdf",
+cover:"1001carabicaraorangtuakepadaremaja.png",
+kategori:"parenting"
+},
+
+{
+judul:"Aneka Makanan dan Minuman untuk Mencerdaskan Otak Bayi",
+file:"goldenia.pdf",
+cover:"anekamakanandanminumanuntukmencerdaskanotakbayi.png",
+kategori:"parenting"
+},
+
+{
+judul:"Kajian Dampak Penggunaan Media Sosial bagi Anak dan Remaja",
+file:"remajanet.pdf",
+cover:"kajiandampakpenggunaanmediasosialbagianakdanremaja.png",
+kategori:"parenting"
+},
+
+{
+judul:"Baca Buku Ini Saat Engkau Gagal",
+file:"lentera.pdf",
+cover:"bacabukuinisaatengkaugagal.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Aristoteles Inspirasi dan Pencerahan Hidup untuk Lebih Bermakna",
+file:"aristoteles.pdf",
+cover:"aristotelesinspirasidanpencerahanuntukhiduplebihbermakna.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Membaca Ekspresi Wajah",
+file:"mimika.pdf",
+cover:"Membaca Ekspresi Wajah.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Gak Capek Dituntut Mulu",
+file:"gakcapekdituntutmulu.pdf",
+cover:"gakcapek dituntutmulu.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Dark Psychology",
+file:"dark.pdf",
+cover:"dark.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Nanti Juga Sembuh Sendiri",
+file:"nantijugasembuhsendiri.pdf",
+cover:"nantijugasembuhsendiri.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Bilang Begini Maksudnya Begitu",
+file:"bilangbeginimaksudnyabegitu.pdf",
+cover:"bilangbeginimaksudnyabegitu.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Rahasia Magnet Rezeki",
+file:"rahasiamagnetrezeki.pdf",
+cover:"rahasiamagnetrezeki.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Berdamai dengan Rasa Malas",
+file:"berdamaidenganrasamalas.pdf",
+cover:"berdamaidenganrasamalas.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Emotional Intelligence Itu DIPRAKTEKIN",
+file:"etonial.pdf",
+cover:"emotional.jpeg",
+kategori:"psikologi"
+},
+
+{
+judul:"Self Knowledge",
+file:"self.pdf",
+cover:"self.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Sebuah Seni untuk Bersikap Bodo Amat",
+file:"sebuahseniuntukbersikapbodoamat.pdf",
+cover:"sebuahseniuntukbersikapbodoamat.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Seni Berbicara kepada Siapa, Kapan Saja, di Mana Saja",
+file:"seniberbicara.pdf",
+cover:"seniberbicara.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Dasar-Dasar Manajemen Pendidikan",
+file:"manajemen.pdf",
+cover:"dasardasarmanajemenpendidikan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Kewirausahaan",
+file:"kewirausahaan.pdf",
+cover:"kewirausahaan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Pemasaran",
+file:"pemasaran.pdf",
+cover:"pemasarandankepuasanpelanggan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Strategi Promosi Pemasaran",
+file:"strategipromosi.pdf",
+cover:"strategipromosipemasaran.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Influencer Digital Marketing",
+file:"influencerdigitalmarket.pdf",
+cover:"influencerdigitalmarketing.png",
+kategori:"bisnis"
+},
+
+{
+judul:"10 Strategi Manajemen Terdahsyat di Dunia",
+file:"manajemen10strategi.pdf",
+cover:"manajemen.jpeg",
+kategori:"bisnis"
+},
+
+{
+judul:"The Psychology of Money",
+file:"money.pdf",
+cover:"psykologyofmoney.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Bisnis Ala Nabi",
+file:"bisnis.pdf",
+cover:"bisnis.jpeg",
+kategori:"bisnis"
+},
+
+{
+judul:"Orang Kaya di Negeri Miskin",
+file:"orangkayadinegerimiskin.pdf",
+cover:"orangkayadinegerimiskin.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Buku Sakti Excel untuk Bisnis dan Perkantoran",
+file:"bukusaktiexcel.pdf",
+cover:"bukusaktiexceluntukbisnisdanperkantoran.png",
+kategori:"teknologi"
+},
+
+{
+judul:"Desain Grafis",
+file:"desaingrafis.pdf",
+cover:"desaingrafis.png",
+kategori:"teknologi"
+},
+
+{
+judul:"5 Hari Jago Desain UI UX",
+file:"jagodesain.pdf",
+cover:"5harijagodesain.png",
+kategori:"teknologi"
+},
+
+{
+judul:"Teknik Mahir Berbicara di Depan Publik",
+file:"berbicara.pdf",
+cover:"teknikmahirberbicara.jpeg",
+kategori:"teknologi"
+},
+
+{
+judul:"Buku Ajar Anatomi",
+file:"anatomi.pdf",
+cover:"anatomidanfisiologimanusia.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Ilmu Kesehatan Masyarakat",
+file:"kesehatan.pdf",
+cover:"ilmukesehatanmasyarakat.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Mengenal Kesehatan Jiwa",
+file:"mengenalkesehatanjiwa.pdf",
+cover:"mengenalkesehatanjiwa.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Studi Filsafat 1",
+file:"filsafat1.pdf",
+cover:"studifilsafat1.png",
+kategori:"filsafat"
+},
+
+{
+judul:"Studi Filsafat 2",
+file:"filsafat2.pdf",
+cover:"studifilsafat2.png",
+kategori:"filsafat"
+},
+
+{
+judul:"Madilog",
+file:"madilog.pdf",
+cover:"madilogtanmalaka.png",
+kategori:"filsafat"
+},
+
+{
+judul:"La Tahzan",
+file:"latahzan.pdf",
+cover:"latahzan.png",
+kategori:"agama"
+},
+
+{
+judul:"Fihi Ma Fihi",
+file:"fihimafihi.pdf",
+cover:"fihimafihi.png",
+kategori:"agama"
+},
+
+{
+judul:"Dhammacitta 7 Langkah",
+file:"7langkah.pdf",
+cover:"7langkahdharmamenjadibenarbenarkaya.png",
+kategori:"agama"
+},
+
+{
+judul:"Cut Muthia Rekayasa Genetika",
+file:"rekayasa.pdf",
+cover:"pengantarrekayasagenetika.png",
+kategori:"teknik"
+},
+
+{
+judul:"Neraka di Warung Kopi",
+file:"nerakadiwarungkopi.pdf",
+cover:"nerakadiwarungkopi.png",
+kategori:"sosial"
+},
+
+{
+judul:"Kuliah Itu Enggak Penting",
+file:"kuliahituenggakpenting.pdf",
+cover:"kuliahituenggakpenting.png",
+kategori:"sosial"
+}
+
 ];
-function tampilkanBuku(){let cari=document.getElementById("searchInput").value.toLowerCase();let kategori=document.getElementById("kategoriFilter").value;let html="";buku.forEach(item=>{let cocokJudul=item.judul.toLowerCase().includes(cari);let cocokKategori=kategori==="semua"||item.kategori===kategori;if(cocokJudul&&cocokKategori){html+=`<div class="book"><div class="book-cover-wrapper"><img src="${item.cover}" alt="${item.judul}" onerror="this.parentElement.innerHTML='<div class=\\\"book-cover-placeholder\\\"><div>📚</div><div>${item.judul}</div></div>'"></div><h3>${item.judul}</h3><div class="book-buttons"><button onclick="simpanBuku('${item.judul.replace(/'/g,"\\'")}')">💾 Simpan</button><button onclick="bukaBuku('${item.file}')">📖 Baca</button></div></div>`;}});if(html===""){html="<div class='empty-message'>📚 Tidak ada buku yang sesuai dengan pencarian Anda</div>";}document.getElementById("daftarBuku").innerHTML=html;}
-document.getElementById("searchInput").addEventListener("keyup",tampilkanBuku);document.getElementById("kategoriFilter").addEventListener("change",tampilkanBuku);tampilkanBuku();
-function bukaBuku(file){window.open(file,"_blank");}
-function simpanBuku(judul){let rak=JSON.parse(localStorage.getItem("rakBuku"))||[];if(!rak.includes(judul)){rak.push(judul);localStorage.setItem("rakBuku",JSON.stringify(rak));alert("✅ Buku '"+judul+"' berhasil disimpan ke rak!");}else{alert("⚠️ Buku sudah ada di rak.");}}
+
+function tampilkanBuku(){
+let cari = document.getElementById("searchInput").value.toLowerCase();
+let kategori = document.getElementById("kategoriFilter").value;
+let html = "";
+
+buku.forEach(item=>{
+let cocokJudul = item.judul.toLowerCase().includes(cari);
+let cocokKategori = kategori==="semua" || item.kategori===kategori;
+
+if(cocokJudul && cocokKategori){
+html += `
+<div class="book">
+<img src="${item.cover}" alt="${item.judul}" onerror="this.src='https://via.placeholder.com/280x280?text=${encodeURIComponent(item.judul)}'">
+<h3>${item.judul}</h3>
+<div class="book-buttons">
+<button onclick="simpanBuku('${item.judul.replace(/'/g, "\\'")}')">💾 Simpan</button>
+<button onclick="bukaBuku('${item.file}')">📖 Baca</button>
+</div>
+</div>
+`;
+}
+});
+
+if(html === ""){
+html = "<div class='empty-message'>📚 Tidak ada buku yang sesuai dengan pencarian Anda</div>";
+}
+
+document.getElementById("daftarBuku").innerHTML = html;
+}
+
+document.getElementById("searchInput").addEventListener("keyup", tampilkanBuku);
+document.getElementById("kategoriFilter").addEventListener("change", tampilkanBuku);
+
+tampilkanBuku();
+
 </script>
+
+<script>
+
+function bukaBuku(file){
+window.open(file,"_blank");
+}
+
+function simpanBuku(judul){
+let rak = JSON.parse(localStorage.getItem("rakBuku")) || [];
+
+if(!rak.includes(judul)){
+rak.push(judul);
+localStorage.setItem("rakBuku",JSON.stringify(rak));
+alert("✅ Buku '" + judul + "' berhasil disimpan ke rak!");
+}else{
+alert("⚠️ Buku sudah ada di rak.");
+}
+}
+
+</script>
+
 </body>
 </html>
