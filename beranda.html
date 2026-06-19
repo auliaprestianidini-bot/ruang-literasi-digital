@@ -74,12 +74,26 @@ nav a:hover{
     padding-left:40px;
 }
 
-.logo-section img{
-    height:120px;
-    width:120px;
-    object-fit:cover;
+.logo-wrapper{
+    width:140px;
+    height:140px;
     border-radius:50%;
-    box-shadow:0 4px 15px rgba(0,0,0,0.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.3) 40%, rgba(77,166,255,0.2));
+    box-shadow:
+        0 0 30px rgba(77,166,255,0.6),
+        0 0 60px rgba(77,166,255,0.4),
+        inset -2px -2px 8px rgba(0,0,0,0.1),
+        inset 2px 2px 8px rgba(255,255,255,0.8);
+}
+
+.logo-wrapper img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    object-fit:contain;
 }
 
 /* Awan */
@@ -252,7 +266,9 @@ footer{
 
 <!-- Logo Section -->
 <div class="logo-section">
-    <img src="ppliterasi.jpeg" alt="Literasi Kuy Logo">
+    <div class="logo-wrapper">
+        <img src="ppliterasi.jpeg" alt="Literasi Kuy Logo">
+    </div>
 </div>
 
 <!-- Hero -->
