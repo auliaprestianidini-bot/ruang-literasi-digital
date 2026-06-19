@@ -340,69 +340,279 @@ document.body.appendChild(glitter);
 <div class="judul">
 <h1>📚 Koleksi Buku</h1>
 <p>Pilih buku favoritmu dan simpan ke rak bacaan.</p>
-</div>
 
-<div class="container">
+<input type="text" id="searchInput" placeholder="🔍 Cari buku..."
+style="width:80%;max-width:500px;padding:12px;border:none;border-radius:15px;margin-top:20px;">
 
+<select id="kategoriFilter"
+style="padding:12px;border:none;border-radius:15px;margin-top:15px;">
+<option value="semua">Semua Kategori</option>
+<option value="novel">Novel</option>
+<option value="parenting">Parenting & Pendidikan Anak</option>
+<option value="psikologi">Psikologi & Pengembangan Diri</option>
+<option value="bisnis">Bisnis & Manajemen</option>
+<option value="teknologi">Teknologi & Digital</option>
+<option value="kesehatan">Kesehatan</option>
+<option value="filsafat">Filsafat</option>
+<option value="agama">Agama</option>
+<option value="teknik">Teknik</option>
+<option value="sosial">Sosial</option>
+</select>
+
+<script>
+
+const buku = [
+
+{
+judul:"Milea Suara Dari Dilan",
+file:"milea.pdf",
+cover:"mileasuaradaridilan.png",
+kategori:"novel"
+},
+
+{
+judul:"Catatan Harian Menantu Sinting",
+file:"absurd.pdf",
+cover:"catatanharianmenantusinting.png",
+kategori:"novel"
+},
+
+{
+judul:"Bukan Jodohnya yang Tak Kunjung Datang",
+file:"bukanjodohnya.pdf",
+cover:"bukanjodohnyayangtakkunjungdatang.png",
+kategori:"novel"
+},
+
+{
+judul:"Cinta 4 Sisi",
+file:"cinta4sisi.pdf",
+cover:"cinta4sisi.png",
+kategori:"novel"
+},
+
+{
+judul:"Cinta di Ujung Batas",
+file:"cintadiujungbatas.pdf",
+cover:"cintadiujungbatas.png",
+kategori:"novel"
+},
+
+{
+judul:"Danur",
+file:"danur.pdf",
+cover:"danur.png",
+kategori:"novel"
+},
+
+{
+judul:"Rasuk",
+file:"rasuk.pdf",
+cover:"rasuk.png",
+kategori:"novel"
+},
+
+{
+judul:"Tentang Kamu",
+file:"tentangkamu.pdf",
+cover:"tentang_kamu.jpeg",
+kategori:"novel"
+},
+
+{
+judul:"Gigi Koko",
+file:"gigikoko.pdf",
+cover:"gigikoko.png",
+kategori:"novel"
+},
+
+{
+judul:"Delapan Enam",
+file:"delapanenam.pdf",
+cover:"sebuahnovel86.png",
+kategori:"novel"
+},
+
+{
+judul:"101 Kesalahan Dalam Mendidik Anak",
+file:"101mendidikdalammendidikanak.pdf",
+cover:"101kesalahamdalammendidikanak.png",
+kategori:"parenting"
+},
+
+{
+judul:"Menggali Potensi Anak Sejak Dini",
+file:"potensia.pdf",
+cover:"menggalipotensianaksejakdini.png",
+kategori:"parenting"
+},
+
+{
+judul:"Baca Buku Ini Saat Engkau Gagal",
+file:"lentera.pdf",
+cover:"bacabukuinisaatengkaugagal.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Dark Psychology",
+file:"dark.pdf",
+cover:"dark.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Nanti Juga Sembuh Sendiri",
+file:"nantijugasembuhsendiri.pdf",
+cover:"nantijugasembuhsendiri.png",
+kategori:"psikologi"
+},
+
+{
+judul:"Dasar-Dasar Manajemen Pendidikan",
+file:"manajemen.pdf",
+cover:"dasardasarmanajemenpendidikan.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Influencer Digital Marketing",
+file:"influencerdigitalmarket.pdf",
+cover:"influencerdigitalmarketing.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Strategi Promosi Pemasaran",
+file:"strategipromosi.pdf",
+cover:"strategipromosipemasaran.png",
+kategori:"bisnis"
+},
+
+{
+judul:"Desain Grafis",
+file:"desaingrafis.pdf",
+cover:"desaingrafis.png",
+kategori:"teknologi"
+},
+
+{
+judul:"5 Hari Jago Desain UI UX",
+file:"jagodesain.pdf",
+cover:"5harijagodesain.png",
+kategori:"teknologi"
+},
+
+{
+judul:"Mengenal Kesehatan Jiwa",
+file:"mengenalkesehatanjiwa.pdf",
+cover:"mengenalkesehatanjiwa.png",
+kategori:"kesehatan"
+},
+
+{
+judul:"Studi Filsafat 1",
+file:"filsafat1.pdf",
+cover:"studifilsafat1.png",
+kategori:"filsafat"
+},
+
+{
+judul:"Studi Filsafat 2",
+file:"filsafat2.pdf",
+cover:"studifilsafat2.png",
+kategori:"filsafat"
+},
+
+{
+judul:"La Tahzan",
+file:"latahzan.pdf",
+cover:"latahzan.png",
+kategori:"agama"
+},
+
+{
+judul:"Fihi Ma Fihi",
+file:"fihimafihi.pdf",
+cover:"fihimafihi.png",
+kategori:"agama"
+},
+
+{
+judul:"Neraka di Warung Kopi",
+file:"nerakadiwarungkopi.pdf",
+cover:"nerakadiwarungkopi.png",
+kategori:"sosial"
+},
+
+{
+judul:"Kuliah Itu Enggak Penting",
+file:"kuliahituenggakpenting.pdf",
+cover:"kuliahituenggakpenting.png",
+kategori:"sosial"
+}
+
+];
+
+function tampilkanBuku(){
+
+let cari =
+document.getElementById("searchInput").value.toLowerCase();
+
+let kategori =
+document.getElementById("kategoriFilter").value;
+
+let html = "";
+
+buku.forEach(item=>{
+
+let cocokJudul =
+item.judul.toLowerCase().includes(cari);
+
+let cocokKategori =
+kategori==="semua" ||
+item.kategori===kategori;
+
+if(cocokJudul && cocokKategori){
+
+html += `
 <div class="book">
-  <h3>101 Kesalahan dalam Mendidik Anak</h3>
-  <button onclick="simpan('101 Kesalahan dalam Mendidik Anak')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('101kesalahananak.pdf')">📖 Baca Buku</button>
-</div>
 
-<div class="book">
-  <h3>Delapan Enam</h3>
-  <button onclick="simpan('Delapan Enam')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('delapanenam.pdf')">📖 Baca Buku</button>
-</div>
+<img src="${item.cover}"
+style="width:100%;height:280px;object-fit:cover;border-radius:15px;">
 
-<div class="book">
-  <h3>Cinta 4 Sisi</h3>
-  <button onclick="simpan('Cinta 4 Sisi')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('cinta4sisi.pdf')">📖 Baca Buku</button>
-</div>
+<h3>${item.judul}</h3>
 
-<div class="book">
-  <h3>Kuliah Itu Enggak Penting</h3>
-  <button onclick="simpan('Kuliah Itu Enggak Penting')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('kuliahitugapenting.pdf')">📖 Baca Buku</button>
-</div>
+<button onclick="simpanBuku('${item.judul}','${item.file}')">
+Simpan ke Rak
+</button>
 
-<div class="book">
-  <h3>Influencer Digital Marketing</h3>
-  <button onclick="simpan('Influencer Digital Marketing')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('influencerdigitalmarket.pdf')">📖 Baca Buku</button>
-</div>
+<button onclick="bukaBuku('${item.file}')">
+📖 Baca Buku
+</button>
 
-<div class="book">
-  <h3>5 Hari Jago Desain UI / UX Keren Aplikasi Android</h3>
-  <button onclick="simpan('5 Hari Jago Desain UI / UX Keren Aplikasi Android')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('jagodesain.pdf')">📖 Baca Buku</button>
 </div>
+`;
 
-<div class="book">
-  <h3>Buku Ajar Strategi Promosi Pemasaran</h3>
-  <button onclick="simpan('Buku Ajar Strategi Promosi Pemasaran')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('strategipromosi.pdf')">📖 Baca Buku</button>
-</div>
+}
 
-<div class="book">
-  <h3>Dasar-Dasar Manajemen Pendidikan</h3>
-  <button onclick="simpan('Dasar-Dasar Manajemen Pendidikan')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('manajemen.pdf')">📖 Baca Buku</button>
-</div>
+});
 
-<div class="book">
-  <h3>Studi Filsafat 2</h3>
-  <button onclick="simpan('Studi Filsafat 2')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('filsafat2.pdf')">📖 Baca Buku</button>
-</div>
+document.getElementById("daftarBuku").innerHTML = html;
 
-<div class="book">
-  <h3>Bukan Jodohnya yang Tak Kunjung Datang</h3>
-  <button onclick="simpan('Bukan Jodohnya yang Tak Kunjung Datang')">Simpan ke Rak</button>
-  <button onclick="bukaBuku('bukanjodohnya.pdf')">📖 Baca Buku</button>
-</div>
+}
+
+document.getElementById("searchInput")
+.addEventListener("keyup", tampilkanBuku);
+
+document.getElementById("kategoriFilter")
+.addEventListener("change", tampilkanBuku);
+
+tampilkanBuku();
+
+</script>
+
+<div class="container" id="daftarBuku"></div>
 
 </div>
 
